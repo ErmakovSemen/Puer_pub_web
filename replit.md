@@ -1,0 +1,110 @@
+# Tea Quest Adventures - Game Development Guide
+
+## Overview
+
+Tea Quest Adventures is a full-stack web application built as a collectible card game centered around tea culture. Players collect tea cards, complete quests, participate in weekly events, and track achievements in a gamified tea exploration experience.
+
+## System Architecture
+
+### Frontend Architecture
+- **Framework**: React 18 with TypeScript
+- **Build Tool**: Vite for fast development and optimized production builds
+- **Routing**: Wouter for lightweight client-side routing
+- **UI Components**: Shadcn/ui component library with Radix UI primitives
+- **Styling**: Tailwind CSS with custom adventure game theme
+- **State Management**: TanStack Query for server state management
+- **Form Handling**: React Hook Form with Zod validation
+
+### Backend Architecture
+- **Runtime**: Node.js with Express.js framework
+- **Language**: TypeScript with ES modules
+- **API Design**: RESTful endpoints with JSON responses
+- **Middleware**: Express middleware for JSON parsing, logging, and error handling
+- **Development**: Hot reload with Vite integration in development mode
+
+### Data Storage Solutions
+- **Database**: PostgreSQL (configured for production deployment)
+- **ORM**: Drizzle ORM for type-safe database operations
+- **Schema Management**: Drizzle Kit for migrations and schema changes
+- **Connection**: Neon Database serverless PostgreSQL connection
+
+## Key Components
+
+### Database Schema
+The application uses a comprehensive schema designed for a card collection game:
+
+- **Users Table**: Player profiles with level, experience, and coins
+- **Tea Cards Table**: Card definitions with rarity, power stats, and metadata
+- **User Cards Table**: Player's card collection with quantities
+- **Quests Table**: Dynamic quest system with progress tracking
+- **Weekly Events Table**: Time-based events and challenges
+- **Achievements Table**: Player accomplishment tracking
+
+### Authentication & Authorization
+Currently implemented with a simplified user system (single default user). The architecture supports expansion to full authentication with:
+- Session-based authentication ready (connect-pg-simple configured)
+- User management endpoints structured for expansion
+- Role-based access patterns prepared in the schema
+
+### Game Mechanics
+- **Card Collection System**: Rarity-based card collection with visual styling
+- **Quest System**: Daily, weekly, and special quest types with rewards
+- **Experience & Leveling**: Player progression through XP and level systems
+- **Currency System**: In-game coins for transactions and rewards
+- **Achievement Tracking**: Goal-based achievement system
+
+## Data Flow
+
+1. **Client Requests**: React components use TanStack Query for data fetching
+2. **API Layer**: Express routes handle business logic and data validation
+3. **Database Operations**: Drizzle ORM manages PostgreSQL interactions
+4. **Response Pipeline**: JSON responses with proper error handling
+5. **State Updates**: Client-side cache invalidation and optimistic updates
+
+## External Dependencies
+
+### Core Dependencies
+- **@neondatabase/serverless**: PostgreSQL connection for Neon Database
+- **drizzle-orm**: Type-safe database operations
+- **@tanstack/react-query**: Server state management
+- **@radix-ui/***: Accessible UI component primitives
+- **tailwindcss**: Utility-first CSS framework
+
+### Development Tools
+- **vite**: Fast build tool and development server
+- **tsx**: TypeScript execution for development
+- **esbuild**: Fast JavaScript bundler for production
+- **@replit/vite-plugin-***: Replit-specific development tools
+
+## Deployment Strategy
+
+### Development Environment
+- **Runtime**: Node.js 20
+- **Database**: PostgreSQL 16
+- **Development Server**: Vite dev server with hot reload
+- **Port Configuration**: Local port 5000, external port 80
+
+### Production Build
+- **Client Build**: Vite builds React app to `dist/public`
+- **Server Build**: esbuild bundles Express server to `dist/index.js`
+- **Database**: Neon Database serverless PostgreSQL
+- **Deployment Target**: Replit Autoscale deployment
+
+### Build Commands
+- `npm run dev`: Development server with hot reload
+- `npm run build`: Production build for both client and server
+- `npm run start`: Production server startup
+- `npm run db:push`: Database schema deployment
+
+## Changelog
+
+```
+Changelog:
+- June 26, 2025. Initial setup
+```
+
+## User Preferences
+
+```
+Preferred communication style: Simple, everyday language.
+```

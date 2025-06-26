@@ -1,0 +1,153 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Libre+Baskerville:wght@400;700&display=swap');
+
+:root {
+  --background: hsl(30, 15%, 85%);
+  --foreground: hsl(20, 14.3%, 4.1%);
+  --muted: hsl(60, 4.8%, 95.9%);
+  --muted-foreground: hsl(25, 5.3%, 44.7%);
+  --popover: hsl(0, 0%, 100%);
+  --popover-foreground: hsl(20, 14.3%, 4.1%);
+  --card: hsl(0, 0%, 100%);
+  --card-foreground: hsl(20, 14.3%, 4.1%);
+  --border: hsl(20, 5.9%, 90%);
+  --input: hsl(20, 5.9%, 90%);
+  --primary: hsl(207, 90%, 54%);
+  --primary-foreground: hsl(211, 100%, 99%);
+  --secondary: hsl(60, 4.8%, 95.9%);
+  --secondary-foreground: hsl(24, 9.8%, 10%);
+  --accent: hsl(60, 4.8%, 95.9%);
+  --accent-foreground: hsl(24, 9.8%, 10%);
+  --destructive: hsl(0, 84.2%, 60.2%);
+  --destructive-foreground: hsl(60, 9.1%, 97.8%);
+  --ring: hsl(20, 14.3%, 4.1%);
+  --radius: 0.5rem;
+  
+  /* Adventure Game Colors */
+  --burgundy-600: hsl(340, 68%, 29%);
+  --burgundy-700: hsl(340, 68%, 35%);
+  --burgundy-800: hsl(340, 68%, 21%);
+  --adventure-brown-600: hsl(30, 43%, 29%);
+  --adventure-brown-700: hsl(30, 43%, 35%);
+  --adventure-brown-800: hsl(30, 43%, 21%);
+  --quest-gold-400: hsl(45, 93%, 47%);
+  --quest-gold-500: hsl(45, 93%, 35%);
+  --quest-gold-600: hsl(45, 100%, 50%);
+  --rarity-purple: hsl(270, 50%, 60%);
+  --cream: hsl(48, 32%, 92%);
+}
+
+.dark {
+  --background: hsl(240, 10%, 3.9%);
+  --foreground: hsl(0, 0%, 98%);
+  --muted: hsl(240, 3.7%, 15.9%);
+  --muted-foreground: hsl(240, 5%, 64.9%);
+  --popover: hsl(240, 10%, 3.9%);
+  --popover-foreground: hsl(0, 0%, 98%);
+  --card: hsl(240, 10%, 3.9%);
+  --card-foreground: hsl(0, 0%, 98%);
+  --border: hsl(240, 3.7%, 15.9%);
+  --input: hsl(240, 3.7%, 15.9%);
+  --primary: hsl(207, 90%, 54%);
+  --primary-foreground: hsl(211, 100%, 99%);
+  --secondary: hsl(240, 3.7%, 15.9%);
+  --secondary-foreground: hsl(0, 0%, 98%);
+  --accent: hsl(240, 3.7%, 15.9%);
+  --accent-foreground: hsl(0, 0%, 98%);
+  --destructive: hsl(0, 62.8%, 30.6%);
+  --destructive-foreground: hsl(0, 0%, 98%);
+  --ring: hsl(240, 4.9%, 83.9%);
+  --radius: 0.5rem;
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply font-sans antialiased;
+    background: linear-gradient(135deg, var(--adventure-brown-800), var(--burgundy-800), var(--adventure-brown-700));
+    color: var(--cream);
+    min-height: 100vh;
+    font-family: 'Libre Baskerville', serif;
+  }
+}
+
+@layer components {
+  .font-adventure {
+    font-family: 'Cinzel', serif;
+  }
+  
+  .font-quest {
+    font-family: 'Libre Baskerville', serif;
+  }
+  
+  .card-hover {
+    transition: all 0.3s ease;
+  }
+  
+  .card-hover:hover {
+    transform: translateY(-5px) scale(1.02);
+  }
+  
+  .rarity-common {
+    border-color: hsl(220, 9%, 46%);
+  }
+  
+  .rarity-uncommon {
+    border-color: hsl(142, 71%, 45%);
+  }
+  
+  .rarity-rare {
+    border-color: hsl(217, 91%, 60%);
+  }
+  
+  .rarity-epic {
+    border-color: hsl(271, 91%, 65%);
+  }
+  
+  .rarity-legendary {
+    border-color: hsl(45, 93%, 47%);
+    animation: cardGlow 2s ease-in-out infinite alternate;
+  }
+  
+  .nav-btn {
+    transition: all 0.3s ease;
+  }
+  
+  .nav-btn:hover {
+    transform: translateY(-2px);
+  }
+}
+
+@layer utilities {
+  .animate-card-glow {
+    animation: cardGlow 2s ease-in-out infinite alternate;
+  }
+  
+  .animate-quest-pulse {
+    animation: questPulse 1.5s ease-in-out infinite;
+  }
+}
+
+@keyframes cardGlow {
+  from { 
+    box-shadow: 0 0 10px hsl(45, 93%, 47%, 0.5);
+  }
+  to { 
+    box-shadow: 0 0 20px hsl(45, 93%, 47%, 0.8), 0 0 30px hsl(45, 93%, 47%, 0.3);
+  }
+}
+
+@keyframes questPulse {
+  0%, 100% { 
+    transform: scale(1);
+  }
+  50% { 
+    transform: scale(1.05);
+  }
+}
