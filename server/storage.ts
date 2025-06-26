@@ -49,6 +49,7 @@ export interface IStorage {
   // Achievement methods
   getUserAchievements(userId: number): Promise<Achievement[]>;
   createAchievement(achievement: InsertAchievement): Promise<Achievement>;
+  updateAchievement(id: number, updates: Partial<Achievement>): Promise<Achievement>;
 }
 
 export class DatabaseStorage implements IStorage {
@@ -157,6 +158,15 @@ export class DatabaseStorage implements IStorage {
     const [achievement] = await db
       .insert(achievements)
       .values(insertAchievement)
+      .returning();
+    return achievement;
+  }
+
+  async updateAchievement(id: number, updates: Partial<Achievement>): Promise<Achievement> {
+    const [achievement] = await db
+      .update(achievements)
+      .set(updates)
+      .where(eq(achievements.id, id))
       .returning();
     return achievement;
   }

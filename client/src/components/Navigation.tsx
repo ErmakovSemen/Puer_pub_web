@@ -10,9 +10,9 @@ interface NavigationProps {
 export default function Navigation({ user }: NavigationProps) {
   const navItems = [
     { href: "/collection", label: "Collection", icon: "🃏", isRoute: true },
+    { href: "/achievements", label: "Profile", icon: "👤", isRoute: true },
     { href: "#quests", label: "Quests", icon: "🗺️", isRoute: false },
-    { href: "#events", label: "Events", icon: "📅", isRoute: false },
-    { href: "#achievements", label: "Achievements", icon: "🏆", isRoute: false }
+    { href: "#events", label: "Events", icon: "📅", isRoute: false }
   ];
 
   return (

@@ -99,6 +99,16 @@ Currently implemented with a simplified user system (single default user). The a
 
 ## Recent Changes
 
+### Personal Achievements Screen with Collection System (June 26, 2025)
+- Created dedicated `/achievements` route for personal player profile and achievement tracking
+- Moved level information from header to personal achievements screen
+- Implemented collection-style achievement system with categories: Collection, Quests, Events, Levels
+- Added tea variety collection achievements: "Try 1 yellow, 1 green, and 1 red tea"
+- Created event participation achievements: "Take part in Go Tournament event"
+- Enhanced achievement tracking with progress bars, rewards display, and completion functionality
+- Updated navigation to include "Profile" link to achievements page
+- Achievement completion awards experience and coins with level progression tracking
+
 ### Combined Level/Experience System with Coin Rewards (June 26, 2025)
 - Redesigned player progression system combining experience with levels
 - Implemented coin earning through quest and task completion (not purchasing)

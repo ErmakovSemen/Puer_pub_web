@@ -147,6 +147,77 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // Complete achievement and award rewards
+  app.post("/api/complete-achievement/:achievementId", async (req, res) => {
+    try {
+      const achievementId = parseInt(req.params.achievementId);
+      const achievement = await storage.updateAchievement(achievementId, { 
+        isCompleted: true,
+        unlockedAt: new Date()
+      });
+      
+      // Get current user and award rewards
+      const user = await storage.getUser(2);
+      if (!user) {
+        return res.status(404).json({ message: "User not found" });
+      }
+
+      const currentExp = user.experience || 0;
+      const currentCoins = user.coins || 0;
+      const currentLevel = user.level || 1;
+      
+      const newExperience = currentExp + (achievement.rewardXp || 0);
+      const newCoins = currentCoins + (achievement.rewardCoins || 0);
+      
+      // Calculate new level (every 1000 XP = 1 level)
+      const newLevel = Math.floor(newExperience / 1000) + 1;
+      const leveledUp = newLevel > currentLevel;
+
+      // Update user with rewards
+      const updatedUser = await storage.updateUser(2, {
+        experience: newExperience,
+        coins: newCoins,
+        level: newLevel
+      });
+
+      res.json({
+        user: updatedUser,
+        achievement: achievement,
+        leveledUp,
+        rewards: {
+          xp: achievement.rewardXp,
+          coins: achievement.rewardCoins
+        }
+      });
+    } catch (error) {
+      res.status(500).json({ message: "Failed to complete achievement" });
+    }
+  });
+
+  // Update achievement progress
+  app.patch("/api/achievement/:achievementId/progress", async (req, res) => {
+    try {
+      const achievementId = parseInt(req.params.achievementId);
+      const { progress } = req.body;
+      
+      const achievement = await storage.updateAchievement(achievementId, { progress });
+      
+      // Check if achievement is now completed
+      if ((achievement.progress || 0) >= achievement.requirement && !achievement.isCompleted) {
+        // Auto-complete the achievement
+        const completedAchievement = await storage.updateAchievement(achievementId, { 
+          isCompleted: true,
+          unlockedAt: new Date()
+        });
+        res.json({ achievement: completedAchievement, autoCompleted: true });
+      } else {
+        res.json({ achievement, autoCompleted: false });
+      }
+    } catch (error) {
+      res.status(500).json({ message: "Failed to update achievement progress" });
+    }
+  });
+
   // Update user stats (level, experience, coins)
   app.patch("/api/user/stats", async (req, res) => {
     try {

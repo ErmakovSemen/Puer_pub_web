@@ -67,7 +67,15 @@ export const achievements = pgTable("achievements", {
   userId: integer("user_id").notNull(),
   title: text("title").notNull(),
   description: text("description").notNull(),
-  unlockedAt: timestamp("unlocked_at").defaultNow(),
+  type: text("type").notNull(), // collection, quest, event, level
+  requirement: integer("requirement").notNull(),
+  progress: integer("progress").default(0),
+  isCompleted: boolean("is_completed").default(false),
+  rewardXp: integer("reward_xp").default(0),
+  rewardCoins: integer("reward_coins").default(0),
+  icon: text("icon"),
+  category: text("category").notNull(),
+  unlockedAt: timestamp("unlocked_at"),
 });
 
 export const insertUserSchema = createInsertSchema(users).omit({
