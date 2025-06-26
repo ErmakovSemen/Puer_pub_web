@@ -6,7 +6,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
-import { ArrowLeft, Star, Plus, Thermometer, Clock, Leaf } from "lucide-react";
+import { ArrowLeft, Plus, Thermometer, Clock, Leaf } from "lucide-react";
 
 interface UserCard {
   id: number;
@@ -62,16 +62,7 @@ export default function Collection() {
     return matchesRarity && matchesType;
   });
 
-  const getStarCount = (rarity: string) => {
-    switch (rarity) {
-      case 'legendary': return 5;
-      case 'epic': return 4;
-      case 'rare': return 3;
-      case 'uncommon': return 2;
-      case 'common': return 1;
-      default: return 1;
-    }
-  };
+
 
   const rarityColors = {
     common: "bg-gray-600 text-white border-gray-400",
@@ -163,17 +154,16 @@ export default function Collection() {
         </div>
 
         {/* Card Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-4">
           {filteredCards.map((card: any) => {
             const rarityClass = rarityColors[card.rarity as keyof typeof rarityColors] || rarityColors.common;
             const borderClass = rarityBorderColors[card.rarity as keyof typeof rarityBorderColors] || rarityBorderColors.common;
-            const starCount = getStarCount(card.rarity);
             const isLegendary = card.rarity === 'legendary';
             
             return (
               <Card 
                 key={card.id} 
-                className={`card-hover rounded-xl border-4 p-4 shadow-2xl cursor-pointer transition-all duration-300 ${
+                className={`card-hover rounded-lg border-2 p-3 shadow-lg cursor-pointer transition-all duration-300 ${
                   !card.isOwned 
                     ? 'bg-gradient-to-b from-gray-700 to-gray-800 border-gray-600 grayscale opacity-60' 
                     : `bg-gradient-to-b from-red-900 to-amber-900 ${borderClass} ${isLegendary ? 'animate-card-glow' : ''}`
@@ -185,12 +175,12 @@ export default function Collection() {
                     <img 
                       src={card.imageUrl} 
                       alt={card.name}
-                      className={`w-full h-32 object-cover rounded-lg mb-3 ${!card.isOwned ? 'grayscale' : ''}`}
+                      className={`w-full h-24 object-cover rounded-md mb-2 ${!card.isOwned ? 'grayscale' : ''}`}
                     />
                     
                     {/* Quantity badge for owned cards */}
                     {card.isOwned && card.quantity > 1 && (
-                      <div className="absolute top-2 right-2 bg-black bg-opacity-80 text-white px-2 py-1 rounded-full text-xs font-bold">
+                      <div className="absolute top-1 right-1 bg-black bg-opacity-80 text-white px-1.5 py-0.5 rounded-full text-xs font-bold">
                         x{card.quantity}
                       </div>
                     )}
@@ -198,90 +188,44 @@ export default function Collection() {
                     {/* Lock icon for unowned cards */}
                     {!card.isOwned && (
                       <div className="absolute inset-0 flex items-center justify-center">
-                        <div className="bg-black bg-opacity-70 text-gray-300 px-3 py-2 rounded-full text-2xl">
+                        <div className="bg-black bg-opacity-70 text-gray-300 px-2 py-1 rounded-full text-lg">
                           🔒
                         </div>
                       </div>
                     )}
                   </div>
                   
-                  <div className="text-center mb-3">
-                    <h3 className={`font-adventure text-lg font-bold mb-1 ${
+                  <div className="text-center mb-2">
+                    <h3 className={`font-adventure text-sm font-bold mb-1 ${
                       card.isOwned ? 'text-yellow-300' : 'text-gray-400'
                     }`}>
                       {card.name}
                     </h3>
-                    
-                    <div className="flex justify-center items-center space-x-1">
-                      {Array.from({ length: 5 }, (_, i) => (
-                        <Star
-                          key={i}
-                          className={`h-4 w-4 ${
-                            i < starCount 
-                              ? card.isOwned
-                                ? card.rarity === 'legendary' 
-                                  ? 'text-yellow-400 fill-yellow-400' 
-                                  : card.rarity === 'epic'
-                                  ? 'text-purple-400 fill-purple-400'
-                                  : card.rarity === 'rare'
-                                  ? 'text-blue-400 fill-blue-400'
-                                  : card.rarity === 'uncommon'
-                                  ? 'text-green-400 fill-green-400'
-                                  : 'text-gray-400 fill-gray-400'
-                                : 'text-gray-500 fill-gray-500 opacity-50'
-                              : 'text-gray-600'
-                          }`}
-                        />
-                      ))}
-                    </div>
                   </div>
                   
-                  <div className={`text-xs space-y-1 mb-3 ${card.isOwned ? 'text-amber-200' : 'text-gray-500'}`}>
-                    <div className="flex justify-between">
-                      <span>Type:</span>
-                      <span className={card.isOwned ? 'text-yellow-300' : 'text-gray-400'}>{card.type}</span>
-                    </div>
-                    <div className="flex justify-between">
-                      <span>Origin:</span>
-                      <span className={card.isOwned ? 'text-yellow-300' : 'text-gray-400'}>{card.origin}</span>
-                    </div>
-                    <div className="flex justify-between">
-                      <span>Power:</span>
-                      <span className={card.isOwned ? 'text-yellow-300' : 'text-gray-400'}>+{card.power} {card.powerType}</span>
-                    </div>
-                  </div>
-
-                  {/* New Characteristics */}
-                  <div className="space-y-2 mb-3">
+                  {/* Compact card info */}
+                  <div className="space-y-1 mb-2">
                     <div className="grid grid-cols-3 gap-1 text-xs">
                       <div className="text-center">
                         <div className={`font-bold ${card.isOwned ? 'text-yellow-400' : 'text-gray-500'}`}>STR</div>
-                        <div className={card.isOwned ? 'text-amber-200' : 'text-gray-400'}>{card.strength}/10</div>
+                        <div className={card.isOwned ? 'text-amber-200' : 'text-gray-400'}>{card.strength}</div>
                       </div>
                       <div className="text-center">
                         <div className={`font-bold ${card.isOwned ? 'text-green-400' : 'text-gray-500'}`}>FRS</div>
-                        <div className={card.isOwned ? 'text-amber-200' : 'text-gray-400'}>{card.freshness}/10</div>
+                        <div className={card.isOwned ? 'text-amber-200' : 'text-gray-400'}>{card.freshness}</div>
                       </div>
                       <div className="text-center">
                         <div className={`font-bold ${card.isOwned ? 'text-purple-400' : 'text-gray-500'}`}>ARM</div>
-                        <div className={card.isOwned ? 'text-amber-200' : 'text-gray-400'}>{card.aroma}/10</div>
+                        <div className={card.isOwned ? 'text-amber-200' : 'text-gray-400'}>{card.aroma}</div>
                       </div>
                     </div>
                     
                     <Badge className={`${
-                      card.isOwned 
-                        ? abilityColors[card.ability as keyof typeof abilityColors] || 'bg-gray-600 text-white'
-                        : 'bg-gray-600 text-gray-400'
-                    } text-xs font-bold w-full justify-center border-2`}>
-                      {card.ability.toUpperCase()}
+                      card.isOwned ? rarityClass : 'bg-gray-600 text-gray-400'
+                    } text-xs font-bold w-full justify-center`}>
+                      {card.rarity.toUpperCase()}
                     </Badge>
                   </div>
-                  
-                  <Badge className={`${
-                    card.isOwned ? rarityClass : 'bg-gray-600 text-gray-400'
-                  } text-xs font-bold w-full justify-center`}>
-                    {card.rarity.toUpperCase()}
-                  </Badge>
                 </CardContent>
               </Card>
             );
@@ -314,26 +258,9 @@ export default function Collection() {
                   />
                   <h2 className="font-adventure text-2xl font-bold text-yellow-300 mb-2">{selectedCard.name}</h2>
                   
-                  <div className="flex justify-center items-center space-x-1 mb-4">
-                    {Array.from({ length: 5 }, (_, i) => (
-                      <Star
-                        key={i}
-                        className={`h-5 w-5 ${
-                          i < getStarCount(selectedCard.rarity)
-                            ? selectedCard.rarity === 'legendary' 
-                              ? 'text-yellow-400 fill-yellow-400' 
-                              : selectedCard.rarity === 'epic'
-                              ? 'text-purple-400 fill-purple-400'
-                              : selectedCard.rarity === 'rare'
-                              ? 'text-blue-400 fill-blue-400'
-                              : selectedCard.rarity === 'uncommon'
-                              ? 'text-green-400 fill-green-400'
-                              : 'text-gray-400 fill-gray-400'
-                            : 'text-gray-600'
-                        }`}
-                      />
-                    ))}
-                  </div>
+                  <Badge className={`${rarityColors[selectedCard.rarity as keyof typeof rarityColors] || rarityColors.common} text-sm font-bold mb-4`}>
+                    {selectedCard.rarity.toUpperCase()}
+                  </Badge>
                 </div>
 
                 <div className="space-y-4 text-amber-200">

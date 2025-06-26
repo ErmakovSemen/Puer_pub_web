@@ -137,6 +137,8 @@ Currently implemented with a simplified user system (single default user). The a
 - Unowned cards display in grayscale with lock icons (Clash Royale style)
 - Owned cards display in full color with quantity badges
 - Added collection progress tracking (owned/total cards)
+- Removed star rating system for cleaner, more compact card design
+- Optimized card grid layout (2-6 columns responsive) with smaller card sizes
 
 ## Changelog
 
