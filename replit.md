@@ -23,10 +23,11 @@ Tea Quest Adventures is a full-stack web application built as a collectible card
 - **Development**: Hot reload with Vite integration in development mode
 
 ### Data Storage Solutions
-- **Database**: PostgreSQL (configured for production deployment)
+- **Database**: PostgreSQL with persistent data storage
 - **ORM**: Drizzle ORM for type-safe database operations
 - **Schema Management**: Drizzle Kit for migrations and schema changes
 - **Connection**: Neon Database serverless PostgreSQL connection
+- **Storage Implementation**: DatabaseStorage class replacing in-memory storage
 
 ## Key Components
 
@@ -123,6 +124,13 @@ Currently implemented with a simplified user system (single default user). The a
 - Enhanced user experience with direct links to major features
 - Maintained adventure game theming throughout navigation
 
+### Database Integration (June 26, 2025)
+- Migrated from in-memory storage to PostgreSQL database
+- Implemented DatabaseStorage class with full CRUD operations
+- Successfully pushed database schema with all tables and relations
+- Populated database with sample tea cards, user data, quests, and weekly events
+- Maintained data integrity with proper foreign key relationships
+
 ## Changelog
 
 ```
@@ -131,6 +139,7 @@ Changelog:
 - June 26, 2025. Enhanced tea cards with characteristics and abilities
 - June 26, 2025. Added separate collection page with detailed card views
 - June 26, 2025. Redesigned weekly events calendar with vintage styling
+- June 26, 2025. Migrated to PostgreSQL database with persistent storage
 ```
 
 ## User Preferences
