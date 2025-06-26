@@ -27,58 +27,51 @@ export default function WeeklyEvents() {
 
   const dayOrder = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'];
   const dayNames = {
-    'monday': 'ПОНЕДЕЛЬНИК',
-    'tuesday': 'ВТОРНИК', 
-    'wednesday': 'СРЕДА',
-    'thursday': 'ЧЕТВЕРГ',
-    'friday': 'ПЯТНИЦА',
-    'saturday': 'СУББОТА',
-    'sunday': 'ВОСКРЕСЕНЬЕ'
+    'monday': '✨ MONDAY',
+    'tuesday': '🌟 TUESDAY', 
+    'wednesday': '💫 WEDNESDAY',
+    'thursday': '⭐ THURSDAY',
+    'friday': '🔮 FRIDAY',
+    'saturday': '🌙 SATURDAY',
+    'sunday': '☄️ SUNDAY'
   };
 
   return (
     <section id="events" className="mb-8">
-      <Card className="rounded-none border-4 border-yellow-400 shadow-2xl"
-            style={{
-              background: 'linear-gradient(to bottom, var(--burgundy-800), var(--adventure-brown-800))',
-              fontFamily: 'monospace'
-            }}>
-        <CardContent className="p-8">
-          {/* Header */}
-          <div className="text-center mb-8 border-4 border-yellow-400 p-6"
-               style={{
-                 background: 'var(--burgundy-700)',
-                 position: 'relative'
-               }}>
-            {/* Decorative corners */}
-            <div className="absolute top-2 left-2 w-4 h-4 border-l-2 border-t-2 border-yellow-400"></div>
-            <div className="absolute top-2 right-2 w-4 h-4 border-r-2 border-t-2 border-yellow-400"></div>
-            <div className="absolute bottom-2 left-2 w-4 h-4 border-l-2 border-b-2 border-yellow-400"></div>
-            <div className="absolute bottom-2 right-2 w-4 h-4 border-r-2 border-b-2 border-yellow-400"></div>
+      <div className="magical-card rounded-2xl relative overflow-hidden animate-magical-float">
+        <div className="absolute inset-0 bg-gradient-to-br from-blue-500/10 via-purple-500/5 to-cyan-500/10 pointer-events-none"></div>
+        <div className="p-8 relative z-10">
+          {/* Celestial Header */}
+          <div className="text-center mb-8 magical-card border-2 border-cyan-400/30 p-8 rounded-xl relative">
+            {/* Magical corners */}
+            <div className="absolute top-2 left-2 w-6 h-6 border-l-2 border-t-2 border-cyan-400 rounded-tl-lg"></div>
+            <div className="absolute top-2 right-2 w-6 h-6 border-r-2 border-t-2 border-cyan-400 rounded-tr-lg"></div>
+            <div className="absolute bottom-2 left-2 w-6 h-6 border-l-2 border-b-2 border-cyan-400 rounded-bl-lg"></div>
+            <div className="absolute bottom-2 right-2 w-6 h-6 border-r-2 border-b-2 border-cyan-400 rounded-br-lg"></div>
 
-            <h2 className="font-adventure text-4xl font-bold text-yellow-400 mb-2 tracking-wider">PUER PUB</h2>
-            <div className="flex items-center justify-center space-x-4 mb-4">
-              <div className="w-8 h-8 rounded-full border-2 border-yellow-400 flex items-center justify-center">
-                <span className="text-yellow-400 text-lg">🍃</span>
+            <h2 className="font-adventure text-4xl font-bold bg-gradient-to-r from-cyan-300 via-purple-300 to-pink-300 bg-clip-text text-transparent mb-4 tracking-wider">✨ CELESTIAL TEA REALM</h2>
+            <div className="flex items-center justify-center space-x-6 mb-6">
+              <div className="w-10 h-10 magical-border rounded-full flex items-center justify-center animate-glow-pulse">
+                <span className="text-2xl">🌟</span>
               </div>
-              <p className="font-quest text-lg text-amber-200 uppercase tracking-wide">WEEKLY TEA ADVENTURES</p>
-              <div className="w-8 h-8 rounded-full border-2 border-yellow-400 flex items-center justify-center">
-                <span className="text-yellow-400 text-lg">🍃</span>
+              <p className="font-quest text-lg text-cyan-200 uppercase tracking-wide">WEEKLY MYSTICAL ADVENTURES</p>
+              <div className="w-10 h-10 magical-border rounded-full flex items-center justify-center animate-glow-pulse">
+                <span className="text-2xl">🌙</span>
               </div>
             </div>
             
-            <div className="border-t-2 border-yellow-400 w-32 mx-auto mb-4"></div>
+            <div className="border-t-2 border-gradient-to-r from-cyan-400 to-purple-400 w-40 mx-auto mb-6"></div>
             
-            <div className="text-center">
-              <p className="font-quest text-amber-200 text-lg uppercase tracking-wider">
-                РАБОТАЕМ ЕЖЕДНЕВНО
+            <div className="text-center space-y-3">
+              <p className="font-quest text-blue-200 text-lg uppercase tracking-wider">
+                OPEN DAILY FOR MYSTICAL JOURNEYS
               </p>
-              <p className="font-quest text-yellow-400 text-xl font-bold">
-                С 10:00 ДО 22:00
+              <p className="font-quest text-cyan-300 text-xl font-bold">
+                10:00 AM - 10:00 PM
               </p>
-              <div className="border-t border-yellow-400 w-24 mx-auto mt-2"></div>
-              <p className="font-quest text-amber-200 text-sm mt-2 uppercase">
-                Электросталь, Проспект Ленина 40/8
+              <div className="border-t border-cyan-400/50 w-32 mx-auto"></div>
+              <p className="font-quest text-blue-200 text-sm uppercase opacity-75">
+                Realm of Endless Tea Adventures
               </p>
             </div>
           </div>
@@ -137,16 +130,16 @@ export default function WeeklyEvents() {
             </div>
           </div>
 
-          {/* Bottom image placeholder */}
+          {/* Mystical Bottom Section */}
           <div className="mt-8 text-center">
-            <div className="inline-block p-4 border-2 border-yellow-400 rounded-lg bg-amber-900">
-              <p className="font-quest text-yellow-400 text-sm">
-                🫖 Discover legendary teas through epic adventures 🫖
+            <div className="magical-card inline-block p-6 border border-cyan-400/30 rounded-xl bg-gradient-to-r from-blue-500/20 to-purple-500/20">
+              <p className="font-quest text-cyan-300 text-sm">
+                🌟 Discover legendary teas through mystical adventures 🌙
               </p>
             </div>
           </div>
-        </CardContent>
-      </Card>
+        </div>
+      </div>
     </section>
   );
 }

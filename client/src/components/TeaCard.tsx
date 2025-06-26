@@ -24,28 +24,28 @@ interface TeaCardProps {
 }
 
 const rarityColors = {
-  common: "bg-gray-600 text-white border-gray-400",
-  uncommon: "bg-green-600 text-white border-green-400",
-  rare: "bg-blue-600 text-white border-blue-400",
-  epic: "bg-purple-600 text-white border-purple-400",
-  legendary: "bg-yellow-600 text-amber-900 border-yellow-400"
+  common: "bg-gradient-to-br from-slate-500 to-slate-600 text-white shadow-slate-500/25",
+  uncommon: "bg-gradient-to-br from-emerald-400 to-green-500 text-white shadow-emerald-500/25",
+  rare: "bg-gradient-to-br from-blue-400 to-cyan-500 text-white shadow-blue-500/25",
+  epic: "bg-gradient-to-br from-purple-400 to-pink-500 text-white shadow-purple-500/25",
+  legendary: "bg-gradient-to-br from-yellow-400 to-orange-500 text-slate-900 shadow-yellow-500/25 animate-glow-pulse"
 };
 
 const rarityBorderColors = {
-  common: "border-gray-400",
-  uncommon: "border-green-400",
-  rare: "border-blue-400",
-  epic: "border-purple-400",
-  legendary: "border-yellow-400"
+  common: "border-slate-400/50",
+  uncommon: "border-emerald-400/50",
+  rare: "border-blue-400/50",
+  epic: "border-purple-400/50",
+  legendary: "border-yellow-400/50"
 };
 
 const abilityColors = {
-  concentrates: "bg-blue-900 text-blue-200 border-blue-400",
-  soothes: "bg-green-900 text-green-200 border-green-400",
-  invigorates: "bg-red-900 text-red-200 border-red-400",
-  calms: "bg-purple-900 text-purple-200 border-purple-400",
-  refreshes: "bg-cyan-900 text-cyan-200 border-cyan-400",
-  energizes: "bg-orange-900 text-orange-200 border-orange-400"
+  concentrates: "bg-gradient-to-r from-blue-500/20 to-cyan-500/20 text-cyan-200 border-cyan-400/30",
+  soothes: "bg-gradient-to-r from-emerald-500/20 to-green-500/20 text-emerald-200 border-emerald-400/30",
+  invigorates: "bg-gradient-to-r from-rose-500/20 to-red-500/20 text-rose-200 border-rose-400/30",
+  calms: "bg-gradient-to-r from-purple-500/20 to-pink-500/20 text-purple-200 border-purple-400/30",
+  refreshes: "bg-gradient-to-r from-cyan-500/20 to-blue-500/20 text-cyan-200 border-cyan-400/30",
+  energizes: "bg-gradient-to-r from-orange-500/20 to-yellow-500/20 text-orange-200 border-orange-400/30"
 };
 
 export default function TeaCard({ card, quantity }: TeaCardProps) {
@@ -67,21 +67,24 @@ export default function TeaCard({ card, quantity }: TeaCardProps) {
   const isLegendary = card.rarity === 'legendary';
 
   return (
-    <Card className={`card-hover bg-gradient-to-b from-red-900 to-amber-900 rounded-xl border-4 p-4 shadow-2xl cursor-pointer ${borderClass} ${isLegendary ? 'animate-card-glow' : ''}`}>
-      <CardContent className="p-0">
-        <img 
-          src={card.imageUrl} 
-          alt={card.name}
-          className="w-full h-32 object-cover rounded-lg mb-3"
-        />
-        
-        <div className="text-center mb-3">
-          <h3 className="font-adventure text-lg font-bold text-yellow-300 mb-1">{card.name}</h3>
+    <div className={`magical-card rounded-2xl p-4 relative overflow-hidden cursor-pointer hover:scale-105 transition-all duration-300 animate-magical-float ${borderClass} ${isLegendary ? 'animate-glow-pulse' : ''}`}>
+      <div className="absolute inset-0 bg-gradient-to-br from-blue-500/10 via-purple-500/5 to-cyan-500/10 pointer-events-none"></div>
+      <div className="relative z-10">
+        <div className="relative mb-4">
+          <img 
+            src={card.imageUrl} 
+            alt={card.name}
+            className="w-full h-32 object-cover rounded-xl shadow-lg"
+          />
           {quantity > 1 && (
-            <Badge variant="secondary" className="mb-2">
+            <div className="absolute top-2 right-2 magical-card px-2 py-1 rounded-full bg-gradient-to-r from-purple-400 to-pink-400 text-white text-xs font-bold">
               x{quantity}
-            </Badge>
+            </div>
           )}
+        </div>
+        
+        <div className="text-center mb-4">
+          <h3 className="font-adventure text-lg font-bold bg-gradient-to-r from-cyan-300 to-purple-300 bg-clip-text text-transparent mb-2">{card.name}</h3>
           <div className="flex justify-center items-center space-x-1">
             {Array.from({ length: 5 }, (_, i) => (
               <Star
@@ -104,47 +107,47 @@ export default function TeaCard({ card, quantity }: TeaCardProps) {
           </div>
         </div>
         
-        <div className="text-xs space-y-1 mb-3 text-amber-200">
+        <div className="text-xs space-y-2 mb-4 text-blue-200">
           <div className="flex justify-between">
             <span>Type:</span>
-            <span className="text-yellow-300">{card.type}</span>
+            <span className="text-cyan-300">{card.type}</span>
           </div>
           <div className="flex justify-between">
             <span>Origin:</span>
-            <span className="text-yellow-300">{card.origin}</span>
+            <span className="text-cyan-300">{card.origin}</span>
           </div>
           <div className="flex justify-between">
             <span>Power:</span>
-            <span className="text-yellow-300">+{card.power} {card.powerType}</span>
+            <span className="text-cyan-300">+{card.power} {card.powerType}</span>
           </div>
         </div>
 
-        {/* New Characteristics */}
-        <div className="space-y-2 mb-3">
-          <div className="grid grid-cols-3 gap-1 text-xs">
-            <div className="text-center">
-              <div className="text-yellow-400 font-bold">STR</div>
-              <div className="text-amber-200">{card.strength}/10</div>
+        {/* Mystical Characteristics */}
+        <div className="space-y-3 mb-4">
+          <div className="grid grid-cols-3 gap-2 text-xs">
+            <div className="magical-card p-2 rounded-lg text-center bg-gradient-to-br from-yellow-500/20 to-orange-500/20">
+              <div className="text-yellow-300 font-bold text-xs">STR</div>
+              <div className="text-white font-bold">{card.strength}/10</div>
             </div>
-            <div className="text-center">
-              <div className="text-green-400 font-bold">FRS</div>
-              <div className="text-amber-200">{card.freshness}/10</div>
+            <div className="magical-card p-2 rounded-lg text-center bg-gradient-to-br from-emerald-500/20 to-green-500/20">
+              <div className="text-emerald-300 font-bold text-xs">FRS</div>
+              <div className="text-white font-bold">{card.freshness}/10</div>
             </div>
-            <div className="text-center">
-              <div className="text-purple-400 font-bold">ARM</div>
-              <div className="text-amber-200">{card.aroma}/10</div>
+            <div className="magical-card p-2 rounded-lg text-center bg-gradient-to-br from-purple-500/20 to-pink-500/20">
+              <div className="text-purple-300 font-bold text-xs">ARM</div>
+              <div className="text-white font-bold">{card.aroma}/10</div>
             </div>
           </div>
           
-          <Badge className={`${abilityColors[card.ability as keyof typeof abilityColors] || 'bg-gray-600 text-white'} text-xs font-bold w-full justify-center border-2`}>
-            {card.ability.toUpperCase()}
-          </Badge>
+          <div className={`magical-card ${abilityColors[card.ability as keyof typeof abilityColors] || 'bg-slate-600/50 text-white'} text-xs font-bold w-full text-center py-2 px-3 rounded-lg border`}>
+            ✨ {card.ability.toUpperCase()}
+          </div>
         </div>
         
-        <Badge className={`${rarityClass} text-xs font-bold w-full justify-center`}>
+        <div className={`magical-card ${rarityClass} text-xs font-bold w-full text-center py-2 px-3 rounded-lg shadow-lg`}>
           {card.rarity.toUpperCase()}
-        </Badge>
-      </CardContent>
-    </Card>
+        </div>
+      </div>
+    </div>
   );
 }

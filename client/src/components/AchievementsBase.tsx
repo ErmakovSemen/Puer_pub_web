@@ -32,52 +32,50 @@ export default function AchievementsBase() {
   const displayedAchievements = achievements.slice(0, 12);
 
   return (
-    <Card className="rounded-xl border-2 border-yellow-400 shadow-xl"
-          style={{background: 'linear-gradient(to bottom, var(--burgundy-700), var(--adventure-brown-700))'}}>
-      <CardHeader className="pb-4">
-        <div className="flex items-center justify-between">
+    <div className="magical-card rounded-2xl relative overflow-hidden animate-magical-float">
+      <div className="absolute inset-0 bg-gradient-to-br from-blue-500/10 via-purple-500/5 to-cyan-500/10 pointer-events-none"></div>
+      <div className="p-6 relative z-10">
+        <div className="flex items-center justify-between mb-6">
           <div className="flex items-center space-x-3">
-            <Trophy className="h-6 w-6 text-yellow-400" />
-            <CardTitle className="font-adventure text-2xl font-bold text-yellow-300">
-              Achievements
-            </CardTitle>
+            <Trophy className="h-8 w-8 text-cyan-400 animate-glow-pulse" />
+            <h3 className="font-adventure text-2xl font-bold bg-gradient-to-r from-cyan-300 to-purple-300 bg-clip-text text-transparent">
+              Celestial Achievements
+            </h3>
           </div>
-          <div className="flex items-center space-x-2">
-            <Badge className="bg-yellow-500 text-amber-900 px-3 py-1 font-bold">
+          <div className="flex items-center space-x-3">
+            <div className="magical-card px-4 py-2 rounded-full bg-gradient-to-r from-purple-400 to-pink-400 text-white font-bold">
               {completedCount}/{totalCount}
-            </Badge>
+            </div>
             <Link href="/achievements">
-              <ChevronRight className="h-5 w-5 text-yellow-400 hover:text-yellow-300 cursor-pointer" />
+              <ChevronRight className="h-6 w-6 text-cyan-400 hover:text-purple-300 cursor-pointer transition-colors duration-300" />
             </Link>
           </div>
         </div>
-      </CardHeader>
-      
-      <CardContent className="pt-0">
+        
         <div className="grid grid-cols-4 gap-4">
           {displayedAchievements.map((achievement) => (
             <Link key={achievement.id} href="/achievements">
               <div className="relative group cursor-pointer">
                 <div 
-                  className={`w-16 h-16 rounded-full border-3 flex items-center justify-center text-2xl transition-all duration-300 group-hover:scale-110 ${
+                  className={`w-16 h-16 rounded-full border-2 flex items-center justify-center text-2xl transition-all duration-300 group-hover:scale-110 ${
                     achievement.isCompleted 
-                      ? 'bg-gradient-to-br from-yellow-400 to-yellow-600 border-yellow-300 shadow-lg' 
-                      : 'bg-gray-600 border-gray-500 grayscale'
+                      ? 'magical-border bg-gradient-to-br from-yellow-400 to-orange-500 text-slate-900 shadow-lg shadow-yellow-500/25 animate-glow-pulse' 
+                      : 'bg-slate-600/50 border-slate-500 text-slate-400'
                   }`}
                 >
-                  {achievement.icon}
+                  {achievement.isCompleted ? '✨' : achievement.icon}
                 </div>
                 
-                {/* Completion indicator */}
+                {/* Celestial completion indicator */}
                 {achievement.isCompleted && (
-                  <div className="absolute -top-1 -right-1 w-6 h-6 bg-green-500 rounded-full border-2 border-white flex items-center justify-center">
-                    <span className="text-white text-xs font-bold">✓</span>
+                  <div className="absolute -top-1 -right-1 w-6 h-6 magical-card bg-gradient-to-r from-emerald-400 to-green-500 rounded-full border border-white flex items-center justify-center shadow-lg shadow-emerald-500/25">
+                    <span className="text-white text-xs">🌟</span>
                   </div>
                 )}
                 
-                {/* Progress indicator for incomplete achievements */}
+                {/* Mystical progress indicator */}
                 {!achievement.isCompleted && achievement.progress > 0 && (
-                  <div className="absolute -bottom-1 -right-1 w-6 h-6 bg-blue-500 rounded-full border-2 border-white flex items-center justify-center">
+                  <div className="absolute -bottom-1 -right-1 w-6 h-6 magical-card bg-gradient-to-r from-blue-400 to-cyan-500 rounded-full border border-white flex items-center justify-center shadow-lg shadow-blue-500/25">
                     <span className="text-white text-xs font-bold">
                       {Math.min(achievement.progress, achievement.requirement)}
                     </span>
@@ -87,25 +85,25 @@ export default function AchievementsBase() {
             </Link>
           ))}
           
-          {/* Add more achievements placeholder if less than 12 */}
+          {/* Mystical placeholders for locked achievements */}
           {displayedAchievements.length < 12 && 
             Array.from({ length: 12 - displayedAchievements.length }).map((_, index) => (
-              <div key={`placeholder-${index}`} className="w-16 h-16 rounded-full border-2 border-dashed border-gray-500 flex items-center justify-center text-gray-500">
-                <span className="text-2xl">?</span>
+              <div key={`placeholder-${index}`} className="w-16 h-16 rounded-full border-2 border-dashed border-slate-500/50 flex items-center justify-center text-slate-400">
+                <span className="text-2xl">🔮</span>
               </div>
             ))
           }
         </div>
         
-        <div className="mt-4 text-center">
+        <div className="mt-6 text-center">
           <Link href="/achievements">
-            <span className="text-amber-200 font-quest text-sm hover:text-yellow-300 cursor-pointer inline-flex items-center">
-              View All Achievements
+            <span className="text-blue-200 font-quest text-sm hover:text-cyan-300 cursor-pointer inline-flex items-center transition-colors duration-300">
+              View All Celestial Achievements
               <ChevronRight className="h-4 w-4 ml-1" />
             </span>
           </Link>
         </div>
-      </CardContent>
-    </Card>
+      </div>
+    </div>
   );
 }

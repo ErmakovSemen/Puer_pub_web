@@ -61,83 +61,76 @@ export default function QuestCard({ quest }: QuestCardProps) {
   const canComplete = quest.progress >= quest.requirement && !quest.isCompleted;
 
   return (
-    <Card className={`rounded-xl p-6 border-4 border-yellow-400 shadow-2xl ${
-      isDailyQuest 
-        ? 'bg-gradient-to-r from-yellow-600 to-yellow-400 text-amber-900' 
-        : 'bg-gradient-to-r from-red-900 to-amber-900 text-amber-100'
-    }`}>
-      <CardContent className="p-0">
-        <div className="flex items-center justify-between mb-4">
-          <h3 className="font-adventure text-xl font-bold">{quest.title}</h3>
-          <Badge className={`${
+    <div className="magical-card rounded-2xl p-6 relative overflow-hidden hover:scale-105 transition-all duration-300 animate-magical-float">
+      <div className="absolute inset-0 bg-gradient-to-br from-blue-500/10 via-purple-500/5 to-cyan-500/10 pointer-events-none"></div>
+      <div className="relative z-10">
+        <div className="flex items-center justify-between mb-6">
+          <h3 className="font-adventure text-xl font-bold bg-gradient-to-r from-cyan-300 to-purple-300 bg-clip-text text-transparent">{quest.title}</h3>
+          <div className={`magical-card px-4 py-2 rounded-full text-sm font-bold ${
             isDailyQuest 
-              ? 'bg-amber-900 text-yellow-400' 
-              : 'bg-yellow-400 text-amber-900'
-          } px-3 py-1 rounded-full text-sm font-bold`}>
-            {quest.type.toUpperCase()}
-          </Badge>
+              ? 'bg-gradient-to-r from-yellow-400 to-orange-500 text-slate-900 shadow-yellow-500/25' 
+              : 'bg-gradient-to-r from-purple-400 to-pink-500 text-white shadow-purple-500/25'
+          }`}>
+            ✨ {quest.type.toUpperCase()}
+          </div>
         </div>
         
-        <p className="font-quest mb-4 leading-relaxed">{quest.description}</p>
+        <p className="font-quest mb-6 leading-relaxed text-blue-200">{quest.description}</p>
         
-        {/* Progress Bar */}
-        <div className="mb-4">
-          <div className="flex justify-between text-sm mb-1">
-            <span>Progress</span>
-            <span>{quest.progress}/{quest.requirement}</span>
+        {/* Mystical Progress Bar */}
+        <div className="mb-6">
+          <div className="flex justify-between text-sm mb-3 text-blue-200">
+            <span className="font-bold">✨ Progress</span>
+            <span className="magical-card px-2 py-1 rounded-full bg-gradient-to-r from-purple-400 to-pink-400 text-white text-xs">{quest.progress}/{quest.requirement}</span>
           </div>
-          <Progress 
-            value={progressPercentage} 
-            className={`h-3 ${
-              isDailyQuest 
-                ? 'bg-amber-900' 
-                : 'bg-amber-900'
-            }`}
-          />
+          <div className="w-full bg-slate-700/50 rounded-full h-3 overflow-hidden">
+            <div 
+              className="h-full bg-gradient-to-r from-cyan-400 to-purple-500 rounded-full transition-all duration-500 animate-shimmer"
+              style={{ width: `${progressPercentage}%` }}
+            ></div>
+          </div>
         </div>
         
         <div className="flex justify-between items-center">
-          <div className="text-sm space-y-1">
-            <div className="font-bold">Rewards:</div>
+          <div className="space-y-3">
+            <div className="text-blue-200 font-bold text-sm">🎁 Rewards:</div>
             <div className="flex items-center space-x-3">
-              <div className="flex items-center space-x-1">
+              <div className="magical-card px-3 py-1 rounded-full bg-gradient-to-r from-blue-400 to-cyan-400 text-white text-sm flex items-center space-x-1">
                 <Star className="h-4 w-4" />
                 <span>+{quest.rewardXp} XP</span>
               </div>
-              <div className="flex items-center space-x-1">
+              <div className="magical-card px-3 py-1 rounded-full bg-gradient-to-r from-yellow-400 to-orange-400 text-slate-900 text-sm flex items-center space-x-1">
                 <Coins className="h-4 w-4" />
                 <span>+{quest.rewardCoins}</span>
               </div>
               {quest.rewardCardId && (
-                <div className="text-xs bg-purple-600 text-white px-2 py-1 rounded">
-                  Rare Card
+                <div className="magical-card px-3 py-1 rounded-full bg-gradient-to-r from-purple-400 to-pink-500 text-white text-xs">
+                  🌟 Rare Card
                 </div>
               )}
             </div>
           </div>
           <Button 
-            className={`font-bold py-2 px-4 rounded-lg transition-all ${
+            className={`magical-card font-bold py-3 px-6 rounded-xl transition-all duration-300 hover:scale-105 border-0 ${
               canComplete
-                ? isDailyQuest
-                  ? 'bg-amber-900 hover:bg-red-900 text-yellow-400 animate-pulse'
-                  : 'bg-yellow-400 hover:bg-yellow-500 text-amber-900 animate-pulse'
+                ? 'bg-gradient-to-r from-yellow-400 to-orange-500 hover:from-yellow-500 hover:to-orange-600 text-slate-900 animate-pulse shadow-lg shadow-yellow-500/25'
                 : quest.isCompleted
-                ? 'bg-green-600 text-white cursor-not-allowed'
-                : 'bg-gray-600 text-gray-400 cursor-not-allowed'
+                ? 'bg-gradient-to-r from-emerald-400 to-green-500 text-white cursor-not-allowed shadow-lg shadow-emerald-500/25'
+                : 'bg-slate-600/50 text-slate-400 cursor-not-allowed'
             }`}
             disabled={quest.isCompleted || completeQuestMutation.isPending}
             onClick={() => canComplete && completeQuestMutation.mutate()}
           >
             {completeQuestMutation.isPending 
-              ? 'Completing...' 
+              ? '🔮 Claiming...' 
               : quest.isCompleted 
-              ? 'Completed ✓' 
+              ? '✨ Completed' 
               : canComplete 
-              ? 'Claim Rewards' 
+              ? '🌟 Claim Rewards' 
               : 'In Progress'}
           </Button>
         </div>
-      </CardContent>
-    </Card>
+      </div>
+    </div>
   );
 }
