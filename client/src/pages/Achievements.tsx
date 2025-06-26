@@ -230,8 +230,8 @@ export default function Achievements() {
                 className={`${
                   isSelected
                     ? 'bg-yellow-400 text-amber-900 border-yellow-400'
-                    : 'border-yellow-400 text-amber-100 hover:bg-yellow-400 hover:text-amber-900'
-                } font-bold`}
+                    : 'bg-amber-800 border-2 border-yellow-400 text-yellow-300 hover:bg-yellow-400 hover:text-amber-900'
+                } font-bold transition-all duration-200`}
                 onClick={() => setSelectedCategory(category.id)}
               >
                 <Icon className="mr-2 h-4 w-4" />
@@ -329,7 +329,7 @@ export default function Achievements() {
                         className={`text-xs px-2 py-1 ${
                           achievement.isCompleted
                             ? 'bg-green-500 text-white'
-                            : 'bg-gray-600 text-gray-300'
+                            : 'bg-amber-700 text-yellow-300 border border-yellow-400'
                         }`}
                       >
                         {achievement.isCompleted ? 'Completed' : `${Math.round(progressPercentage)}%`}

@@ -99,6 +99,12 @@ Currently implemented with a simplified user system (single default user). The a
 
 ## Recent Changes
 
+### Enhanced Button Styling for Better Readability (June 26, 2025)
+- Improved grey button contrast by replacing with amber/yellow theme colors
+- Enhanced category button styling with amber background and yellow text
+- Updated progress badges to use amber-yellow color scheme for better visibility
+- Added transition effects and proper border styling for consistent UI experience
+
 ### Streamlined Home Page Layout (June 26, 2025)
 - Removed player header and hero section from main page for cleaner interface
 - Simplified home page layout to focus on core content sections
