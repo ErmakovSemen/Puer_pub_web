@@ -131,6 +131,13 @@ Currently implemented with a simplified user system (single default user). The a
 - Populated database with sample tea cards, user data, quests, and weekly events
 - Maintained data integrity with proper foreign key relationships
 
+### Clash Royale-Style Collection System (June 26, 2025)
+- Implemented complete card catalog display showing all available tea cards
+- Added ownership status tracking for each card in the collection
+- Unowned cards display in grayscale with lock icons (Clash Royale style)
+- Owned cards display in full color with quantity badges
+- Added collection progress tracking (owned/total cards)
+
 ## Changelog
 
 ```
@@ -140,6 +147,7 @@ Changelog:
 - June 26, 2025. Added separate collection page with detailed card views
 - June 26, 2025. Redesigned weekly events calendar with vintage styling
 - June 26, 2025. Migrated to PostgreSQL database with persistent storage
+- June 26, 2025. Implemented Clash Royale-style collection system with all cards visible
 ```
 
 ## User Preferences
