@@ -99,6 +99,15 @@ Currently implemented with a simplified user system (single default user). The a
 
 ## Recent Changes
 
+### Combined Level/Experience System with Coin Rewards (June 26, 2025)
+- Redesigned player progression system combining experience with levels
+- Implemented coin earning through quest and task completion (not purchasing)
+- Created PlayerHeader component matching user's screenshot reference
+- Added quest completion system with experience and coin rewards
+- Level progression: 1000 XP = 1 level with visual progress tracking
+- Enhanced quest cards with reward display and completion functionality
+- Populated database with sample quests demonstrating coin earning mechanics
+
 ### Tea Card Enhancement (June 26, 2025)
 - Added new tea card characteristics: strength (1-10), freshness (1-10), aroma (1-10)
 - Added ability system with effects: concentrates, soothes, invigorates, calms, refreshes, energizes

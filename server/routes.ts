@@ -8,7 +8,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
   // Get current user (simplified - in real app would use authentication)
   app.get("/api/user", async (req, res) => {
     try {
-      const user = await storage.getUser(1); // Default user ID
+      const user = await storage.getUser(2); // Default user ID
       if (!user) {
         return res.status(404).json({ message: "User not found" });
       }
@@ -31,7 +31,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
   // Get user's tea cards
   app.get("/api/user-cards", async (req, res) => {
     try {
-      const userCards = await storage.getUserCards(1); // Default user ID
+      const userCards = await storage.getUserCards(2); // Default user ID
       res.json(userCards);
     } catch (error) {
       res.status(500).json({ message: "Failed to get user cards" });
@@ -41,7 +41,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
   // Get user's quests
   app.get("/api/quests", async (req, res) => {
     try {
-      const quests = await storage.getUserQuests(1); // Default user ID
+      const quests = await storage.getUserQuests(2); // Default user ID
       res.json(quests);
     } catch (error) {
       res.status(500).json({ message: "Failed to get quests" });
@@ -74,7 +74,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
   // Get user achievements
   app.get("/api/achievements", async (req, res) => {
     try {
-      const achievements = await storage.getUserAchievements(1); // Default user ID
+      const achievements = await storage.getUserAchievements(2); // Default user ID
       res.json(achievements);
     } catch (error) {
       res.status(500).json({ message: "Failed to get achievements" });
@@ -93,7 +93,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
         rewardXp: 500,
         rewardCoins: 200,
         rewardCardId: 3,
-        userId: 1
+        userId: 2
       });
       res.json(newQuest);
     } catch (error) {
@@ -101,11 +101,57 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // Complete quest and update user stats with rewards
+  app.post("/api/complete-quest/:questId", async (req, res) => {
+    try {
+      const questId = parseInt(req.params.questId);
+      const quest = await storage.updateQuest(questId, { isCompleted: true });
+      
+      // Get current user
+      const user = await storage.getUser(2);
+      if (!user) {
+        return res.status(404).json({ message: "User not found" });
+      }
+
+      // Calculate level progression
+      const currentExp = user.experience || 0;
+      const currentCoins = user.coins || 0;
+      const currentLevel = user.level || 1;
+      
+      const newExperience = currentExp + quest.rewardXp;
+      const newCoins = currentCoins + quest.rewardCoins;
+      
+      // Calculate new level (every 1000 XP = 1 level)
+      const newLevel = Math.floor(newExperience / 1000) + 1;
+      const leveledUp = newLevel > currentLevel;
+
+      // Update user with rewards
+      const updatedUser = await storage.updateUser(2, {
+        experience: newExperience,
+        coins: newCoins,
+        level: newLevel
+      });
+
+      res.json({
+        user: updatedUser,
+        quest: quest,
+        leveledUp,
+        rewards: {
+          xp: quest.rewardXp,
+          coins: quest.rewardCoins,
+          cardId: quest.rewardCardId
+        }
+      });
+    } catch (error) {
+      res.status(500).json({ message: "Failed to complete quest" });
+    }
+  });
+
   // Update user stats (level, experience, coins)
   app.patch("/api/user/stats", async (req, res) => {
     try {
       const updates = req.body;
-      const user = await storage.updateUser(1, updates); // Default user ID
+      const user = await storage.updateUser(2, updates); // Default user ID
       res.json(user);
     } catch (error) {
       res.status(500).json({ message: "Failed to update user stats" });

@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { Link } from "wouter";
 import Navigation from "@/components/Navigation";
-import PlayerStats from "@/components/PlayerStats";
+import PlayerHeader from "@/components/PlayerHeader";
 import TeaCard from "@/components/TeaCard";
 import QuestCard from "@/components/QuestCard";
 import WeeklyEvents from "@/components/WeeklyEvents";
@@ -92,21 +92,12 @@ export default function Home() {
       <Navigation user={user} />
       
       <div className="container mx-auto px-6 py-8">
+        {/* Player Header */}
+        {user && <PlayerHeader user={user} />}
+        
         <div className="grid grid-cols-12 gap-6">
-          
-          {/* Sidebar */}
-          <aside className="col-span-12 lg:col-span-3">
-            <PlayerStats 
-              user={user} 
-              achievements={achievements}
-              experiencePercentage={experiencePercentage}
-              collectionPercentage={collectionPercentage}
-              userCards={userCards}
-            />
-          </aside>
-
           {/* Main Content */}
-          <main className="col-span-12 lg:col-span-9">
+          <main className="col-span-12">
             
             {/* Hero Section */}
             <section className="relative overflow-hidden rounded-2xl p-8 mb-8 border-4 shadow-2xl"
