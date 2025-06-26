@@ -21,6 +21,13 @@ export const teaCards = pgTable("tea_cards", {
   powerType: text("power_type").notNull(), // Focus, Energy, Calm, etc.
   imageUrl: text("image_url").notNull(),
   description: text("description"),
+  // New characteristics
+  strength: integer("strength").notNull(), // 1-10 scale
+  freshness: integer("freshness").notNull(), // 1-10 scale
+  aroma: integer("aroma").notNull(), // 1-10 scale
+  ability: text("ability").notNull(), // soothes, invigorates, concentrates, etc.
+  brewingTime: text("brewing_time"), // e.g. "3-5 minutes"
+  temperature: text("temperature"), // e.g. "80-85°C"
 });
 
 export const userCards = pgTable("user_cards", {

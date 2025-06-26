@@ -96,11 +96,41 @@ Currently implemented with a simplified user system (single default user). The a
 - `npm run start`: Production server startup
 - `npm run db:push`: Database schema deployment
 
+## Recent Changes
+
+### Tea Card Enhancement (June 26, 2025)
+- Added new tea card characteristics: strength (1-10), freshness (1-10), aroma (1-10)
+- Added ability system with effects: concentrates, soothes, invigorates, calms, refreshes, energizes
+- Added brewing specifications: brewing time and temperature for each tea
+- Enhanced card display with characteristic stats and ability badges
+- Updated database schema to support new tea properties
+
+### Separate Collection Page (June 26, 2025)
+- Created dedicated `/collection` route for full tea card management
+- Implemented detailed card modal with brewing instructions and characteristics
+- Added progress bars for tea characteristics (strength, freshness, aroma)
+- Enhanced card filtering and search functionality
+- Updated navigation to include direct collection access
+
+### Weekly Events Calendar Redesign (June 26, 2025)
+- Redesigned weekly events calendar to match vintage pub schedule aesthetic
+- Added Cyrillic text styling to match traditional tea house theme
+- Implemented decorative borders and vintage layout structure
+- Enhanced visual hierarchy with proper day-by-day event organization
+
+### Navigation Improvements (June 26, 2025)
+- Added routing support for collection page in navigation
+- Enhanced user experience with direct links to major features
+- Maintained adventure game theming throughout navigation
+
 ## Changelog
 
 ```
 Changelog:
-- June 26, 2025. Initial setup
+- June 26, 2025. Initial setup with basic tea collection game
+- June 26, 2025. Enhanced tea cards with characteristics and abilities
+- June 26, 2025. Added separate collection page with detailed card views
+- June 26, 2025. Redesigned weekly events calendar with vintage styling
 ```
 
 ## User Preferences

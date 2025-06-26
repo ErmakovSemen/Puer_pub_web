@@ -94,7 +94,13 @@ export class MemStorage implements IStorage {
         power: 25,
         powerType: "Focus",
         imageUrl: "https://images.unsplash.com/photo-1544787219-7f47ccb76574?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=600",
-        description: "A legendary green tea with unmatched clarity and focus enhancement."
+        description: "A legendary green tea with unmatched clarity and focus enhancement.",
+        strength: 8,
+        freshness: 10,
+        aroma: 9,
+        ability: "concentrates",
+        brewingTime: "2-3 minutes",
+        temperature: "80°C"
       },
       {
         id: 2,
@@ -105,7 +111,13 @@ export class MemStorage implements IStorage {
         power: 20,
         powerType: "Calm",
         imageUrl: "https://images.unsplash.com/photo-1515823064-d6e0c04616a7?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=600",
-        description: "Traditional ceremonial matcha that brings inner peace and tranquility."
+        description: "Traditional ceremonial matcha that brings inner peace and tranquility.",
+        strength: 7,
+        freshness: 9,
+        aroma: 8,
+        ability: "soothes",
+        brewingTime: "1-2 minutes",
+        temperature: "70°C"
       },
       {
         id: 3,
@@ -116,7 +128,13 @@ export class MemStorage implements IStorage {
         power: 15,
         powerType: "Energy",
         imageUrl: "https://images.unsplash.com/photo-1597318150924-b1ebb48e4c66?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600",
-        description: "A premium Earl Grey blend with bergamot that energizes the spirit."
+        description: "A premium Earl Grey blend with bergamot that energizes the spirit.",
+        strength: 9,
+        freshness: 7,
+        aroma: 10,
+        ability: "invigorates",
+        brewingTime: "3-5 minutes",
+        temperature: "95°C"
       },
       {
         id: 4,
@@ -127,7 +145,13 @@ export class MemStorage implements IStorage {
         power: 10,
         powerType: "Rest",
         imageUrl: "https://images.unsplash.com/photo-1597318150924-b1ebb48e4c66?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600",
-        description: "Soothing chamomile flowers that promote restful sleep and relaxation."
+        description: "Soothing chamomile flowers that promote restful sleep and relaxation.",
+        strength: 3,
+        freshness: 8,
+        aroma: 7,
+        ability: "calms",
+        brewingTime: "5-7 minutes",
+        temperature: "100°C"
       },
       {
         id: 5,
@@ -138,7 +162,13 @@ export class MemStorage implements IStorage {
         power: 5,
         powerType: "Health",
         imageUrl: "https://images.unsplash.com/photo-1556679343-c7306c1976bc?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=600",
-        description: "A simple yet refreshing green tea that supports overall health."
+        description: "A simple yet refreshing green tea that supports overall health.",
+        strength: 5,
+        freshness: 6,
+        aroma: 5,
+        ability: "refreshes",
+        brewingTime: "3-4 minutes",
+        temperature: "85°C"
       },
       {
         id: 6,
@@ -149,7 +179,13 @@ export class MemStorage implements IStorage {
         power: 5,
         powerType: "Energy",
         imageUrl: "https://images.unsplash.com/photo-1559056199-641a0ac8b55e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=600",
-        description: "A robust morning tea blend perfect for starting the day."
+        description: "A robust morning tea blend perfect for starting the day.",
+        strength: 7,
+        freshness: 6,
+        aroma: 6,
+        ability: "energizes",
+        brewingTime: "4-5 minutes",
+        temperature: "95°C"
       }
     ];
 

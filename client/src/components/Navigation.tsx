@@ -1,5 +1,6 @@
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { Link } from "wouter";
 import { Leaf, User, Coins } from "lucide-react";
 
 interface NavigationProps {
@@ -8,10 +9,10 @@ interface NavigationProps {
 
 export default function Navigation({ user }: NavigationProps) {
   const navItems = [
-    { href: "#collection", label: "Collection", icon: "🃏" },
-    { href: "#quests", label: "Quests", icon: "🗺️" },
-    { href: "#events", label: "Events", icon: "📅" },
-    { href: "#achievements", label: "Achievements", icon: "🏆" }
+    { href: "/collection", label: "Collection", icon: "🃏", isRoute: true },
+    { href: "#quests", label: "Quests", icon: "🗺️", isRoute: false },
+    { href: "#events", label: "Events", icon: "📅", isRoute: false },
+    { href: "#achievements", label: "Achievements", icon: "🏆", isRoute: false }
   ];
 
   return (
@@ -29,14 +30,23 @@ export default function Navigation({ user }: NavigationProps) {
           {/* Navigation Menu */}
           <div className="hidden md:flex space-x-6">
             {navItems.map((item) => (
-              <a
-                key={item.href}
-                href={item.href}
-                className="nav-btn bg-red-900 hover:bg-red-800 px-4 py-2 rounded-lg border-2 border-yellow-400 font-quest font-semibold transition-all duration-300 text-amber-200 hover:text-yellow-300"
-              >
-                <span className="mr-2">{item.icon}</span>
-                {item.label}
-              </a>
+              item.isRoute ? (
+                <Link key={item.href} href={item.href}>
+                  <div className="nav-btn bg-red-900 hover:bg-red-800 px-4 py-2 rounded-lg border-2 border-yellow-400 font-quest font-semibold transition-all duration-300 text-amber-200 hover:text-yellow-300 cursor-pointer">
+                    <span className="mr-2">{item.icon}</span>
+                    {item.label}
+                  </div>
+                </Link>
+              ) : (
+                <a
+                  key={item.href}
+                  href={item.href}
+                  className="nav-btn bg-red-900 hover:bg-red-800 px-4 py-2 rounded-lg border-2 border-yellow-400 font-quest font-semibold transition-all duration-300 text-amber-200 hover:text-yellow-300"
+                >
+                  <span className="mr-2">{item.icon}</span>
+                  {item.label}
+                </a>
+              )
             ))}
           </div>
 

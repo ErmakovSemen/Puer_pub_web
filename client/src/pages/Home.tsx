@@ -1,4 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
+import { Link } from "wouter";
 import Navigation from "@/components/Navigation";
 import PlayerStats from "@/components/PlayerStats";
 import TeaCard from "@/components/TeaCard";
@@ -12,19 +13,64 @@ import { Progress } from "@/components/ui/progress";
 import { Coins, Trophy, Play, Eye, Plus } from "lucide-react";
 import { useState } from "react";
 
+interface UserCard {
+  id: number;
+  userId: number;
+  cardId: number;
+  quantity: number;
+  card: {
+    id: number;
+    name: string;
+    type: string;
+    origin: string;
+    rarity: string;
+    power: number;
+    powerType: string;
+    imageUrl: string;
+    description?: string;
+    strength: number;
+    freshness: number;
+    aroma: number;
+    ability: string;
+    brewingTime?: string;
+    temperature?: string;
+  };
+}
+
+interface User {
+  id: number;
+  username: string;
+  level: number;
+  experience: number;
+  coins: number;
+}
+
+interface Quest {
+  id: number;
+  title: string;
+  description: string;
+  type: string;
+  requirement: number;
+  progress: number;
+  rewardXp: number;
+  rewardCoins: number;
+  rewardCardId?: number;
+  isCompleted: boolean;
+}
+
 export default function Home() {
   const [rarityFilter, setRarityFilter] = useState("all");
   const [typeFilter, setTypeFilter] = useState("all");
 
-  const { data: user } = useQuery({
+  const { data: user } = useQuery<User>({
     queryKey: ["/api/user"],
   });
 
-  const { data: userCards = [] } = useQuery({
+  const { data: userCards = [] } = useQuery<UserCard[]>({
     queryKey: ["/api/user-cards"],
   });
 
-  const { data: quests = [] } = useQuery({
+  const { data: quests = [] } = useQuery<Quest[]>({
     queryKey: ["/api/quests"],
   });
 
@@ -32,7 +78,7 @@ export default function Home() {
     queryKey: ["/api/achievements"],
   });
 
-  const filteredCards = userCards.filter((userCard: any) => {
+  const filteredCards = userCards.filter((userCard: UserCard) => {
     const matchesRarity = rarityFilter === "all" || userCard.card.rarity === rarityFilter;
     const matchesType = typeFilter === "all" || userCard.card.type === typeFilter;
     return matchesRarity && matchesType;
@@ -88,14 +134,15 @@ export default function Home() {
                     <Play className="mr-2 h-4 w-4" />
                     Start Daily Quest
                   </Button>
-                  <Button 
-                    variant="outline" 
-                    className="border-2 border-yellow-400 text-amber-100 hover:bg-yellow-400 hover:text-amber-900 font-bold py-3 px-6"
-                    onClick={() => window.scrollTo({ top: document.getElementById('collection')?.offsetTop, behavior: 'smooth' })}
-                  >
-                    <Eye className="mr-2 h-4 w-4" />
-                    View Collection
-                  </Button>
+                  <Link href="/collection">
+                    <Button 
+                      variant="outline" 
+                      className="border-2 border-yellow-400 text-amber-100 hover:bg-yellow-400 hover:text-amber-900 font-bold py-3 px-6"
+                    >
+                      <Eye className="mr-2 h-4 w-4" />
+                      View Collection
+                    </Button>
+                  </Link>
                 </div>
               </div>
             </section>
@@ -108,52 +155,32 @@ export default function Home() {
               <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 gap-4">
                 <h2 className="font-adventure text-3xl font-bold text-yellow-300">Your Tea Collection</h2>
                 <div className="flex flex-wrap gap-4">
-                  <Select value={rarityFilter} onValueChange={setRarityFilter}>
-                    <SelectTrigger className="w-40 bg-amber-900 border-2 border-yellow-400 text-amber-100">
-                      <SelectValue placeholder="All Rarities" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="all">All Rarities</SelectItem>
-                      <SelectItem value="common">Common</SelectItem>
-                      <SelectItem value="uncommon">Uncommon</SelectItem>
-                      <SelectItem value="rare">Rare</SelectItem>
-                      <SelectItem value="epic">Epic</SelectItem>
-                      <SelectItem value="legendary">Legendary</SelectItem>
-                    </SelectContent>
-                  </Select>
-                  <Select value={typeFilter} onValueChange={setTypeFilter}>
-                    <SelectTrigger className="w-40 bg-amber-900 border-2 border-yellow-400 text-amber-100">
-                      <SelectValue placeholder="All Types" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="all">All Types</SelectItem>
-                      <SelectItem value="Green Tea">Green Tea</SelectItem>
-                      <SelectItem value="Black Tea">Black Tea</SelectItem>
-                      <SelectItem value="Oolong">Oolong</SelectItem>
-                      <SelectItem value="White Tea">White Tea</SelectItem>
-                      <SelectItem value="Herbal">Herbal</SelectItem>
-                      <SelectItem value="Powdered Green">Powdered Green</SelectItem>
-                    </SelectContent>
-                  </Select>
+                  <Link href="/collection">
+                    <Button className="bg-yellow-400 hover:bg-yellow-500 text-amber-900 font-bold">
+                      View Full Collection ({userCards.length} cards)
+                    </Button>
+                  </Link>
                 </div>
               </div>
 
-              {/* Card Grid */}
+              {/* Card Grid - Show limited cards on home page */}
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-                {filteredCards.map((userCard: any) => (
+                {filteredCards.slice(0, 7).map((userCard: UserCard) => (
                   <TeaCard key={userCard.id} card={userCard.card} quantity={userCard.quantity} />
                 ))}
                 
-                {/* Placeholder for more cards */}
-                <Card className="border-4 border-dashed border-yellow-400 bg-gradient-to-b from-amber-900 to-red-900 cursor-pointer hover:bg-gradient-to-b hover:from-amber-800 hover:to-red-800 transition-all duration-300">
-                  <CardContent className="flex items-center justify-center h-80 p-4">
-                    <div className="text-center">
-                      <Plus className="h-12 w-12 text-yellow-400 mb-3 mx-auto" />
-                      <p className="font-quest text-yellow-400 font-semibold">Discover New Teas</p>
-                      <p className="text-xs opacity-75 mt-2 text-amber-200">Complete quests to unlock</p>
-                    </div>
-                  </CardContent>
-                </Card>
+                {/* View All Cards Link */}
+                <Link href="/collection">
+                  <Card className="border-4 border-dashed border-yellow-400 bg-gradient-to-b from-amber-900 to-red-900 cursor-pointer hover:bg-gradient-to-b hover:from-amber-800 hover:to-red-800 transition-all duration-300">
+                    <CardContent className="flex items-center justify-center h-80 p-4">
+                      <div className="text-center">
+                        <Plus className="h-12 w-12 text-yellow-400 mb-3 mx-auto" />
+                        <p className="font-quest text-yellow-400 font-semibold">View Full Collection</p>
+                        <p className="text-xs opacity-75 mt-2 text-amber-200">{userCards.length} cards available</p>
+                      </div>
+                    </CardContent>
+                  </Card>
+                </Link>
               </div>
             </section>
 

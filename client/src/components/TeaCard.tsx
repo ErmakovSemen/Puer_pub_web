@@ -13,6 +13,12 @@ interface TeaCardProps {
     powerType: string;
     imageUrl: string;
     description?: string;
+    strength: number;
+    freshness: number;
+    aroma: number;
+    ability: string;
+    brewingTime?: string;
+    temperature?: string;
   };
   quantity: number;
 }
@@ -31,6 +37,15 @@ const rarityBorderColors = {
   rare: "border-blue-400",
   epic: "border-purple-400",
   legendary: "border-yellow-400"
+};
+
+const abilityColors = {
+  concentrates: "bg-blue-900 text-blue-200 border-blue-400",
+  soothes: "bg-green-900 text-green-200 border-green-400",
+  invigorates: "bg-red-900 text-red-200 border-red-400",
+  calms: "bg-purple-900 text-purple-200 border-purple-400",
+  refreshes: "bg-cyan-900 text-cyan-200 border-cyan-400",
+  energizes: "bg-orange-900 text-orange-200 border-orange-400"
 };
 
 export default function TeaCard({ card, quantity }: TeaCardProps) {
@@ -102,6 +117,28 @@ export default function TeaCard({ card, quantity }: TeaCardProps) {
             <span>Power:</span>
             <span className="text-yellow-300">+{card.power} {card.powerType}</span>
           </div>
+        </div>
+
+        {/* New Characteristics */}
+        <div className="space-y-2 mb-3">
+          <div className="grid grid-cols-3 gap-1 text-xs">
+            <div className="text-center">
+              <div className="text-yellow-400 font-bold">STR</div>
+              <div className="text-amber-200">{card.strength}/10</div>
+            </div>
+            <div className="text-center">
+              <div className="text-green-400 font-bold">FRS</div>
+              <div className="text-amber-200">{card.freshness}/10</div>
+            </div>
+            <div className="text-center">
+              <div className="text-purple-400 font-bold">ARM</div>
+              <div className="text-amber-200">{card.aroma}/10</div>
+            </div>
+          </div>
+          
+          <Badge className={`${abilityColors[card.ability as keyof typeof abilityColors] || 'bg-gray-600 text-white'} text-xs font-bold w-full justify-center border-2`}>
+            {card.ability.toUpperCase()}
+          </Badge>
         </div>
         
         <Badge className={`${rarityClass} text-xs font-bold w-full justify-center`}>
