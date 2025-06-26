@@ -5,6 +5,7 @@ import PlayerHeader from "@/components/PlayerHeader";
 import TeaCard from "@/components/TeaCard";
 import QuestCard from "@/components/QuestCard";
 import TaskBubble from "@/components/TaskBubble";
+import AchievementsBase from "@/components/AchievementsBase";
 import WeeklyEvents from "@/components/WeeklyEvents";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -225,6 +226,11 @@ export default function Home() {
                   <QuestCard key={quest.id} quest={quest} />
                 ))}
               </div>
+            </section>
+
+            {/* Achievements Base */}
+            <section id="achievements" className="mb-8">
+              <AchievementsBase />
             </section>
 
           </main>
