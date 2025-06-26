@@ -1,8 +1,8 @@
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Libre+Baskerville:wght@400;700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Libre+Baskerville:wght@400;700&display=swap');
 
 :root {
   --background: hsl(30, 15%, 85%);
@@ -26,18 +26,35 @@
   --ring: hsl(20, 14.3%, 4.1%);
   --radius: 0.5rem;
   
-  /* Adventure Game Colors */
-  --burgundy-600: hsl(340, 68%, 29%);
-  --burgundy-700: hsl(340, 68%, 35%);
-  --burgundy-800: hsl(340, 68%, 21%);
-  --adventure-brown-600: hsl(30, 43%, 29%);
-  --adventure-brown-700: hsl(30, 43%, 35%);
-  --adventure-brown-800: hsl(30, 43%, 21%);
-  --quest-gold-400: hsl(45, 93%, 47%);
-  --quest-gold-500: hsl(45, 93%, 35%);
-  --quest-gold-600: hsl(45, 100%, 50%);
-  --rarity-purple: hsl(270, 50%, 60%);
-  --cream: hsl(48, 32%, 92%);
+  /* Genshin-Inspired Magical Colors */
+  --magic-dark: hsl(220, 25%, 8%);
+  --magic-bg: hsl(220, 20%, 12%);
+  --magic-surface: hsl(220, 15%, 16%);
+  --magic-elevated: hsl(220, 20%, 20%);
+  
+  --primary-blue: hsl(210, 90%, 65%);
+  --secondary-blue: hsl(210, 80%, 75%);
+  --accent-cyan: hsl(180, 70%, 60%);
+  
+  --primary-gold: hsl(45, 100%, 70%);
+  --secondary-gold: hsl(45, 95%, 80%);
+  --warm-gold: hsl(35, 90%, 65%);
+  
+  --accent-purple: hsl(280, 70%, 65%);
+  --accent-pink: hsl(320, 70%, 70%);
+  
+  --text-primary: hsl(220, 30%, 95%);
+  --text-secondary: hsl(220, 20%, 80%);
+  --text-muted: hsl(220, 15%, 65%);
+  
+  --border-subtle: hsl(220, 25%, 25%);
+  --border-accent: hsl(220, 40%, 35%);
+  --border-glow: hsl(210, 90%, 65%);
+  
+  --glow-blue: 0 0 30px hsla(210, 90%, 65%, 0.4);
+  --glow-gold: 0 0 30px hsla(45, 100%, 70%, 0.4);
+  --glow-purple: 0 0 30px hsla(280, 70%, 65%, 0.4);
+  --glow-cyan: 0 0 30px hsla(180, 70%, 60%, 0.4);
 }
 
 .dark {
@@ -70,10 +87,30 @@
 
   body {
     @apply font-sans antialiased;
-    background: linear-gradient(135deg, var(--adventure-brown-800), var(--burgundy-800), var(--adventure-brown-700));
-    color: var(--cream);
+    background: 
+      radial-gradient(ellipse at top, hsla(210, 90%, 65%, 0.1) 0%, transparent 50%),
+      radial-gradient(ellipse at bottom, hsla(280, 70%, 65%, 0.1) 0%, transparent 50%),
+      linear-gradient(135deg, var(--magic-dark), var(--magic-bg), var(--magic-surface));
+    color: var(--text-primary);
     min-height: 100vh;
     font-family: 'Libre Baskerville', serif;
+    position: relative;
+    overflow-x: hidden;
+  }
+  
+  body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: 
+      radial-gradient(circle at 20% 20%, hsla(210, 90%, 65%, 0.05) 0%, transparent 50%),
+      radial-gradient(circle at 80% 80%, hsla(280, 70%, 65%, 0.05) 0%, transparent 50%),
+      radial-gradient(circle at 40% 60%, hsla(45, 100%, 70%, 0.03) 0%, transparent 50%);
+    pointer-events: none;
+    z-index: -1;
   }
 }
 
@@ -126,28 +163,100 @@
 
 @layer utilities {
   .animate-card-glow {
-    animation: cardGlow 2s ease-in-out infinite alternate;
+    animation: cardGlow 3s ease-in-out infinite alternate;
   }
   
   .animate-quest-pulse {
-    animation: questPulse 1.5s ease-in-out infinite;
+    animation: questPulse 2s ease-in-out infinite;
+  }
+  
+  .animate-magical-float {
+    animation: magicalFloat 4s ease-in-out infinite;
+  }
+  
+  .animate-shimmer {
+    animation: shimmer 2s linear infinite;
+  }
+  
+  .animate-glow-pulse {
+    animation: glowPulse 2s ease-in-out infinite;
+  }
+  
+  .glass-morphism {
+    background: hsla(220, 20%, 16%, 0.8);
+    backdrop-filter: blur(12px);
+    border: 1px solid hsla(220, 40%, 35%, 0.5);
+  }
+  
+  .magical-border {
+    position: relative;
+    border: 2px solid transparent;
+    background: linear-gradient(var(--magic-surface), var(--magic-surface)) padding-box,
+                linear-gradient(45deg, var(--primary-blue), var(--accent-cyan), var(--primary-gold)) border-box;
+  }
+  
+  .magical-card {
+    background: linear-gradient(135deg, 
+      hsla(220, 15%, 16%, 0.9) 0%,
+      hsla(220, 20%, 20%, 0.9) 100%);
+    border: 1px solid hsla(210, 90%, 65%, 0.3);
+    box-shadow: 
+      0 8px 32px hsla(220, 25%, 8%, 0.6),
+      inset 0 1px 0 hsla(210, 90%, 65%, 0.1);
   }
 }
 
 @keyframes cardGlow {
   from { 
-    box-shadow: 0 0 10px hsl(45, 93%, 47%, 0.5);
+    box-shadow: 
+      0 0 20px var(--glow-gold),
+      0 8px 32px hsla(220, 25%, 8%, 0.6);
   }
   to { 
-    box-shadow: 0 0 20px hsl(45, 93%, 47%, 0.8), 0 0 30px hsl(45, 93%, 47%, 0.3);
+    box-shadow: 
+      0 0 40px var(--glow-gold),
+      0 0 60px hsla(45, 100%, 70%, 0.2),
+      0 8px 32px hsla(220, 25%, 8%, 0.6);
   }
 }
 
 @keyframes questPulse {
   0%, 100% { 
     transform: scale(1);
+    box-shadow: 0 0 20px var(--glow-blue);
   }
   50% { 
-    transform: scale(1.05);
+    transform: scale(1.02);
+    box-shadow: 0 0 30px var(--glow-blue);
+  }
+}
+
+@keyframes magicalFloat {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  33% {
+    transform: translateY(-10px) rotate(1deg);
+  }
+  66% {
+    transform: translateY(-5px) rotate(-1deg);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+@keyframes glowPulse {
+  0%, 100% {
+    box-shadow: 0 0 20px var(--glow-blue);
+  }
+  50% {
+    box-shadow: 0 0 40px var(--glow-blue);
   }
 }

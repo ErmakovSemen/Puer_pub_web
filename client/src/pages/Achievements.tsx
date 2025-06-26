@@ -155,67 +155,71 @@ export default function Achievements() {
 
         {/* Player Profile Section */}
         {user && (
-          <Card className="rounded-xl border-2 border-yellow-400 p-6 mb-8 shadow-2xl"
-                style={{background: 'linear-gradient(to bottom, var(--burgundy-700), var(--adventure-brown-700))'}}>
-            <CardContent className="p-0">
-              <div className="flex items-center justify-between mb-6">
+          <div className="magical-card rounded-2xl p-8 mb-8 relative overflow-hidden animate-magical-float">
+            <div className="absolute inset-0 bg-gradient-to-br from-blue-500/10 via-purple-500/5 to-cyan-500/10 pointer-events-none"></div>
+            <div className="relative z-10">
+              <div className="flex items-center justify-between mb-8">
                 <div>
-                  <h1 className="font-adventure text-3xl font-bold text-yellow-300 mb-2">
+                  <h1 className="font-adventure text-4xl font-bold bg-gradient-to-r from-blue-300 via-cyan-300 to-purple-300 bg-clip-text text-transparent mb-3">
                     {user.username}'s Profile
                   </h1>
-                  <p className="text-amber-200 font-quest">
-                    Tea Master in Training
+                  <p className="text-blue-200 font-quest text-lg">
+                    ✨ Celestial Tea Master ✨
                   </p>
                 </div>
                 <div className="text-right">
-                  <div className="text-4xl mb-2">👤</div>
-                  <Badge className="bg-yellow-500 text-amber-900 px-3 py-1 font-bold">
+                  <div className="text-6xl mb-3 animate-glow-pulse">🌟</div>
+                  <div className="magical-card px-4 py-2 rounded-full bg-gradient-to-r from-purple-400 to-pink-400 text-white font-bold">
                     Level {user.level}
-                  </Badge>
+                  </div>
                 </div>
               </div>
 
               {/* Stats Grid */}
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
-                <div className="text-center">
-                  <div className="text-2xl font-bold text-yellow-300">{user.experience}</div>
-                  <div className="text-amber-200 text-sm">Total Experience</div>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                <div className="magical-card p-4 rounded-xl text-center bg-gradient-to-br from-blue-500/20 to-cyan-500/20">
+                  <div className="text-3xl font-bold bg-gradient-to-r from-cyan-300 to-blue-300 bg-clip-text text-transparent">{user.experience}</div>
+                  <div className="text-blue-200 text-sm mt-1">✨ Total Experience</div>
                 </div>
-                <div className="text-center">
-                  <div className="text-2xl font-bold text-yellow-300">{user.coins}</div>
-                  <div className="text-amber-200 text-sm">Coins Earned</div>
+                <div className="magical-card p-4 rounded-xl text-center bg-gradient-to-br from-yellow-500/20 to-orange-500/20">
+                  <div className="text-3xl font-bold bg-gradient-to-r from-yellow-300 to-orange-300 bg-clip-text text-transparent">{user.coins}</div>
+                  <div className="text-yellow-200 text-sm mt-1">💰 Coins Earned</div>
                 </div>
-                <div className="text-center">
-                  <div className="text-2xl font-bold text-yellow-300">{completedCount}/{totalCount}</div>
-                  <div className="text-amber-200 text-sm">Achievements</div>
+                <div className="magical-card p-4 rounded-xl text-center bg-gradient-to-br from-purple-500/20 to-pink-500/20">
+                  <div className="text-3xl font-bold bg-gradient-to-r from-purple-300 to-pink-300 bg-clip-text text-transparent">{completedCount}/{totalCount}</div>
+                  <div className="text-purple-200 text-sm mt-1">🏆 Achievements</div>
                 </div>
               </div>
 
               {/* Experience Progress */}
-              <div className="mb-4">
-                <div className="flex justify-between text-sm mb-2 text-amber-200">
-                  <span>Progress to Level {user.level + 1}</span>
+              <div className="mb-6 magical-card p-4 rounded-xl">
+                <div className="flex justify-between text-sm mb-3 text-blue-200">
+                  <span>🌟 Progress to Level {user.level + 1}</span>
                   <span>{expInCurrentLevel}/{expNeededForLevel} XP</span>
                 </div>
-                <Progress 
-                  value={expProgress} 
-                  className="h-3 bg-amber-900 border border-yellow-400"
-                />
+                <div className="w-full bg-slate-700/50 rounded-full h-3 overflow-hidden">
+                  <div 
+                    className="h-full bg-gradient-to-r from-cyan-400 to-blue-500 rounded-full transition-all duration-500 animate-shimmer"
+                    style={{ width: `${expProgress}%` }}
+                  ></div>
+                </div>
               </div>
 
               {/* Achievement Progress */}
-              <div>
-                <div className="flex justify-between text-sm mb-2 text-amber-200">
-                  <span>Achievement Progress</span>
+              <div className="magical-card p-4 rounded-xl">
+                <div className="flex justify-between text-sm mb-3 text-blue-200">
+                  <span>🏆 Achievement Progress</span>
                   <span>{completedCount}/{totalCount}</span>
                 </div>
-                <Progress 
-                  value={completionPercentage} 
-                  className="h-3 bg-amber-900 border border-yellow-400"
-                />
+                <div className="w-full bg-slate-700/50 rounded-full h-3 overflow-hidden">
+                  <div 
+                    className="h-full bg-gradient-to-r from-purple-400 to-pink-500 rounded-full transition-all duration-500 animate-shimmer"
+                    style={{ width: `${completionPercentage}%` }}
+                  ></div>
+                </div>
               </div>
-            </CardContent>
-          </Card>
+            </div>
+          </div>
         )}
 
         {/* Achievement Categories */}
@@ -229,12 +233,12 @@ export default function Achievements() {
                 variant={isSelected ? "default" : "outline"}
                 className={`${
                   isSelected
-                    ? 'bg-yellow-400 text-amber-900 border-yellow-400'
-                    : 'bg-amber-800 border-2 border-yellow-400 text-yellow-300 hover:bg-yellow-400 hover:text-amber-900'
-                } font-bold transition-all duration-200`}
+                    ? 'magical-card bg-gradient-to-r from-purple-500 to-pink-500 text-white shadow-lg shadow-purple-500/25'
+                    : 'magical-card bg-slate-800/50 text-blue-200 hover:bg-slate-700/50 hover:text-cyan-300'
+                } border-0 font-quest font-semibold px-6 py-3 rounded-xl transition-all duration-300 hover:scale-105 group`}
                 onClick={() => setSelectedCategory(category.id)}
               >
-                <Icon className="mr-2 h-4 w-4" />
+                <Icon className={`mr-2 h-5 w-5 ${isSelected ? 'animate-pulse' : 'group-hover:animate-bounce'}`} />
                 {category.name}
               </Button>
             );
@@ -344,13 +348,13 @@ export default function Achievements() {
 
         {/* Empty State */}
         {filteredAchievements.length === 0 && (
-          <div className="text-center py-12">
-            <div className="text-6xl mb-4">🏆</div>
-            <h3 className="font-adventure text-2xl font-bold text-yellow-300 mb-2">
+          <div className="magical-card rounded-2xl p-12 text-center">
+            <div className="text-8xl mb-6 animate-glow-pulse">🌟</div>
+            <h3 className="font-adventure text-3xl font-bold bg-gradient-to-r from-cyan-300 to-purple-300 bg-clip-text text-transparent mb-4">
               No Achievements Yet
             </h3>
-            <p className="text-amber-200 font-quest">
-              Complete quests and collect tea cards to unlock achievements!
+            <p className="text-blue-200 font-quest text-lg">
+              Complete quests and collect tea cards to unlock magical achievements!
             </p>
           </div>
         )}
