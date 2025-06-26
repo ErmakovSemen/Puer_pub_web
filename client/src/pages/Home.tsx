@@ -94,91 +94,9 @@ export default function Home() {
       <Navigation user={user} />
       
       <div className="container mx-auto px-6 py-8">
-        {/* Player Header */}
-        {user && <PlayerHeader user={user} />}
-        
         <div className="grid grid-cols-12 gap-6">
           {/* Main Content */}
           <main className="col-span-12">
-            
-            {/* Hero Section */}
-            <section className="relative overflow-hidden rounded-2xl p-8 mb-8 border-4 shadow-2xl"
-                     style={{
-                       background: 'linear-gradient(to right, var(--burgundy-600), var(--adventure-brown-600))',
-                       borderColor: 'var(--quest-gold-400)'
-                     }}>
-              <div className="absolute inset-0 opacity-10">
-                <div className="w-full h-full bg-repeat opacity-20" 
-                     style={{backgroundImage: `url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 20 20'><path fill='%23DAA520' d='M10 2c4 0 8 2 8 6s-4 6-8 6-8-2-8-6 4-6 8-6z'/></svg>")`}}></div>
-              </div>
-              
-              <div className="relative z-10">
-                <h2 className="font-adventure text-4xl font-bold mb-4 text-yellow-300">Welcome, Tea Adventurer!</h2>
-                <p className="font-quest text-lg mb-6 leading-relaxed text-amber-100">
-                  Embark on an epic journey to discover and collect the world's most legendary teas. 
-                  Complete quests, participate in events, and build the ultimate tea collection.
-                </p>
-                
-                <div className="flex flex-wrap gap-4">
-                  <Button 
-                    className="bg-yellow-400 hover:bg-yellow-500 text-amber-900 font-bold py-3 px-6 animate-quest-pulse"
-                    onClick={() => window.scrollTo({ top: document.getElementById('quests')?.offsetTop, behavior: 'smooth' })}
-                  >
-                    <Play className="mr-2 h-4 w-4" />
-                    Start Daily Quest
-                  </Button>
-                  <Link href="/collection">
-                    <Button 
-                      variant="outline" 
-                      className="border-2 border-yellow-400 text-amber-100 hover:bg-yellow-400 hover:text-amber-900 font-bold py-3 px-6"
-                    >
-                      <Eye className="mr-2 h-4 w-4" />
-                      View Collection
-                    </Button>
-                  </Link>
-                </div>
-              </div>
-            </section>
-
-            {/* Tea Tasting Tasks */}
-            <section id="tasks" className="mb-8">
-              <h2 className="font-adventure text-3xl font-bold text-yellow-300 mb-6">Tea Tasting Progress</h2>
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                {(achievements as any[])
-                  .filter((achievement: any) => achievement.category === "collection" && achievement.title === "Tea Explorer")
-                  .map((achievement: any) => {
-                    const taskData = {
-                      ...achievement,
-                      points: [
-                        {
-                          id: "yellow",
-                          label: "Yellow Tea",
-                          color: "yellow",
-                          completed: achievement.progress >= 1,
-                          teaType: "yellow"
-                        },
-                        {
-                          id: "green",
-                          label: "Green Tea",
-                          color: "green",
-                          completed: achievement.progress >= 2,
-                          teaType: "green"
-                        },
-                        {
-                          id: "red",
-                          label: "Red Tea",
-                          color: "red",
-                          completed: achievement.progress >= 3,
-                          teaType: "red"
-                        }
-                      ]
-                    };
-                    return (
-                      <TaskBubble key={achievement.id} task={taskData} />
-                    );
-                  })}
-              </div>
-            </section>
 
             {/* Weekly Events */}
             <WeeklyEvents />

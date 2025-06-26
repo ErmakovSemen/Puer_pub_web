@@ -99,6 +99,11 @@ Currently implemented with a simplified user system (single default user). The a
 
 ## Recent Changes
 
+### Streamlined Home Page Layout (June 26, 2025)
+- Removed player header and hero section from main page for cleaner interface
+- Simplified home page layout to focus on core content sections
+- Maintained essential functionality while reducing visual clutter
+
 ### Achievements Base Grid with Navigation (June 26, 2025)
 - Created AchievementsBase component displaying achievement icons in 4x3 grid layout
 - Added circular achievement icons with completion indicators and progress badges
