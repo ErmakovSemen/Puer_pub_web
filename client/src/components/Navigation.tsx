@@ -12,7 +12,7 @@ export default function Navigation({ user }: NavigationProps) {
     { href: "/collection", label: "Collection", icon: "🃏", isRoute: true },
     { href: "/achievements", label: "Profile", icon: "👤", isRoute: true },
     { href: "#quests", label: "Quests", icon: "🗺️", isRoute: false },
-    { href: "#events", label: "Events", icon: "📅", isRoute: false }
+    { href: "/events", label: "Events", icon: "📅", isRoute: true }
   ];
 
   return (

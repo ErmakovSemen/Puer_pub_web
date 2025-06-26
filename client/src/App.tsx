@@ -6,6 +6,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import Home from "@/pages/Home";
 import Collection from "@/pages/Collection";
 import Achievements from "@/pages/Achievements";
+import Events from "@/pages/Events";
 import NotFound from "@/pages/not-found";
 
 function Router() {
@@ -14,6 +15,7 @@ function Router() {
       <Route path="/" component={Home} />
       <Route path="/collection" component={Collection} />
       <Route path="/achievements" component={Achievements} />
+      <Route path="/events" component={Events} />
       <Route component={NotFound} />
     </Switch>
   );

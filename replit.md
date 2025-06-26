@@ -99,6 +99,12 @@ Currently implemented with a simplified user system (single default user). The a
 
 ## Recent Changes
 
+### Events Navigation and Page Implementation (June 26, 2025)
+- Created dedicated `/events` route with WeeklyEvents component display
+- Fixed Events button navigation to link to dedicated events page
+- Added proper routing configuration for events screen
+- Enhanced navigation system with consistent routing structure
+
 ### Enhanced Button Styling for Better Readability (June 26, 2025)
 - Improved grey button contrast by replacing with amber/yellow theme colors
 - Enhanced category button styling with amber background and yellow text
