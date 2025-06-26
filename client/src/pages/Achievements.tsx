@@ -1,6 +1,7 @@
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { Link } from "wouter";
 import Navigation from "@/components/Navigation";
+import TaskBubble from "@/components/TaskBubble";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
@@ -83,6 +84,43 @@ export default function Achievements() {
     { id: "event", name: "Events", icon: Calendar },
     { id: "level", name: "Levels", icon: Coins }
   ];
+
+  // Transform achievements to task format for bubble display
+  const transformAchievementToTask = (achievement: Achievement) => {
+    let points: any[] = [];
+    
+    // Special handling for Tea Explorer achievement with 3 tea types
+    if (achievement.title === "Tea Explorer") {
+      points = [
+        {
+          id: "yellow",
+          label: "Yellow Tea", 
+          color: "yellow",
+          completed: achievement.progress >= 1,
+          teaType: "yellow"
+        },
+        {
+          id: "green", 
+          label: "Green Tea",
+          color: "green", 
+          completed: achievement.progress >= 2,
+          teaType: "green"
+        },
+        {
+          id: "red",
+          label: "Red Tea",
+          color: "red",
+          completed: achievement.progress >= 3,
+          teaType: "red"
+        }
+      ];
+    }
+    
+    return {
+      ...achievement,
+      points
+    };
+  };
 
   const filteredAchievements = selectedCategory === "all" 
     ? allAchievements 
@@ -206,6 +244,16 @@ export default function Achievements() {
         {/* Achievements Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {filteredAchievements.map((achievement) => {
+            const taskData = transformAchievementToTask(achievement);
+            
+            // Use TaskBubble for collection achievements with progress points
+            if (achievement.category === "collection" && taskData.points.length > 0) {
+              return (
+                <TaskBubble key={achievement.id} task={taskData} />
+              );
+            }
+            
+            // Regular achievement card for other types
             const progressPercentage = (achievement.progress / achievement.requirement) * 100;
             const canComplete = achievement.progress >= achievement.requirement && !achievement.isCompleted;
             

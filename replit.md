@@ -99,6 +99,14 @@ Currently implemented with a simplified user system (single default user). The a
 
 ## Recent Changes
 
+### Bubble-Style Task Cards with Tea Tasting Progress (June 26, 2025)
+- Created TaskBubble component with visual progress points for tea feelings/tasting tracking
+- Implemented bubble visualization showing yellow, green, and red tea tasting progress
+- Added visual completion indicators with colored circles for each tea type
+- Enhanced Tea Explorer achievement with 3-point progress system matching user's screenshot reference
+- Integrated bubble-style cards in both Home page and Achievements page
+- Added animated progress indicators and reward claiming functionality for bubble tasks
+
 ### Personal Achievements Screen with Collection System (June 26, 2025)
 - Created dedicated `/achievements` route for personal player profile and achievement tracking
 - Moved level information from header to personal achievements screen

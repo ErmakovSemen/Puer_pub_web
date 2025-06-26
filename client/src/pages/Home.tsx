@@ -4,6 +4,7 @@ import Navigation from "@/components/Navigation";
 import PlayerHeader from "@/components/PlayerHeader";
 import TeaCard from "@/components/TeaCard";
 import QuestCard from "@/components/QuestCard";
+import TaskBubble from "@/components/TaskBubble";
 import WeeklyEvents from "@/components/WeeklyEvents";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -74,7 +75,7 @@ export default function Home() {
     queryKey: ["/api/quests"],
   });
 
-  const { data: achievements = [] } = useQuery({
+  const { data: achievements = [] } = useQuery<any[]>({
     queryKey: ["/api/achievements"],
   });
 
@@ -135,6 +136,46 @@ export default function Home() {
                     </Button>
                   </Link>
                 </div>
+              </div>
+            </section>
+
+            {/* Tea Tasting Tasks */}
+            <section id="tasks" className="mb-8">
+              <h2 className="font-adventure text-3xl font-bold text-yellow-300 mb-6">Tea Tasting Progress</h2>
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                {(achievements as any[])
+                  .filter((achievement: any) => achievement.category === "collection" && achievement.title === "Tea Explorer")
+                  .map((achievement: any) => {
+                    const taskData = {
+                      ...achievement,
+                      points: [
+                        {
+                          id: "yellow",
+                          label: "Yellow Tea",
+                          color: "yellow",
+                          completed: achievement.progress >= 1,
+                          teaType: "yellow"
+                        },
+                        {
+                          id: "green",
+                          label: "Green Tea",
+                          color: "green",
+                          completed: achievement.progress >= 2,
+                          teaType: "green"
+                        },
+                        {
+                          id: "red",
+                          label: "Red Tea",
+                          color: "red",
+                          completed: achievement.progress >= 3,
+                          teaType: "red"
+                        }
+                      ]
+                    };
+                    return (
+                      <TaskBubble key={achievement.id} task={taskData} />
+                    );
+                  })}
               </div>
             </section>
 
