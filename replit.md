@@ -6,21 +6,29 @@ Tea Quest Adventures is a full-stack web application built as a collectible card
 
 ## System Architecture
 
-### Frontend Architecture
+### Frontend Architecture (Mobile-First)
+- **Framework**: React Native with Expo for cross-platform development
+- **Navigation**: React Navigation for native mobile navigation
+- **UI Components**: React Native Paper with custom magical styling
+- **State Management**: Redux Toolkit with RTK Query for efficient API calls
+- **Platform Support**: iOS, Android, and web through Expo
+- **Styling**: React Native StyleSheet with magical Genshin-inspired design
+- **Web Compatibility**: Expo Web maintains web accessibility
+
+### Legacy Web Frontend (Backup)
 - **Framework**: React 18 with TypeScript
 - **Build Tool**: Vite for fast development and optimized production builds
 - **Routing**: Wouter for lightweight client-side routing
 - **UI Components**: Shadcn/ui component library with Radix UI primitives
-- **Styling**: Tailwind CSS with custom adventure game theme
-- **State Management**: TanStack Query for server state management
-- **Form Handling**: React Hook Form with Zod validation
+- **Styling**: Tailwind CSS with custom magical game theme
 
 ### Backend Architecture
-- **Runtime**: Node.js with Express.js framework
-- **Language**: TypeScript with ES modules
-- **API Design**: RESTful endpoints with JSON responses
-- **Middleware**: Express middleware for JSON parsing, logging, and error handling
-- **Development**: Hot reload with Vite integration in development mode
+- **Framework**: Django with Django REST Framework
+- **Language**: Python with comprehensive ORM support
+- **API Design**: RESTful endpoints with DRF serializers and viewsets
+- **Admin Interface**: Django admin for game content management
+- **Authentication**: Django's built-in authentication system
+- **CORS**: Django CORS headers for cross-platform API access
 
 ### Data Storage Solutions
 - **Database**: PostgreSQL with persistent data storage
@@ -98,6 +106,15 @@ Currently implemented with a simplified user system (single default user). The a
 - `npm run db:push`: Database schema deployment
 
 ## Recent Changes
+
+### Complete Stack Migration to React Native + Django (July 28, 2025)
+- **Backend Migration**: Successfully migrated from Node.js/Express to Django + Django REST Framework
+- **Frontend Migration**: Created React Native mobile app with Expo for cross-platform compatibility
+- **API Compatibility**: Maintained all existing API endpoints with Django REST Framework
+- **State Management**: Implemented Redux Toolkit with RTK Query for efficient data fetching
+- **Mobile-First Design**: Created native mobile screens matching the magical Genshin aesthetic
+- **Database Continuity**: Preserved PostgreSQL database with Django models matching existing schema
+- **Cross-Platform Ready**: Mobile app supports iOS, Android, and web through Expo
 
 ### Backup Branch Creation for Global Changes (July 28, 2025)
 - Created backup documentation and checkpoint before major architectural changes
